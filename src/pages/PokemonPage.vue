@@ -1,11 +1,9 @@
 <template>
   <q-page class="bg-black">
     <Header />
-    <div class="col-12 pokemon__text text-center">
-     
-    </div>
+    <div class="col-12 pokemon__text text-center"></div>
     <div class="row q-pt-md q-pa-lg bg-red-10 full-width flex flex-center">
-      <div class="col-md-5 col-12  ">
+      <div class="col-md-5 col-12">
         <q-input
           dense
           color="white"
@@ -27,22 +25,21 @@
         </q-input>
       </div>
     </div>
-<div class="col-12 pokemon__text text-center">
-
-      Esta aplicação utiliza a api <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
+    <div class="col-12 pokemon__text text-center">
+      Esta aplicação utiliza a api
+      <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
     </div>
-    
 
     <div class="container q-pa-lg">
       <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
-        <div class="row flex-center ">
+        <div class="row flex-center">
           <div
             class="col-12 col-md-12 text-white text-center text-h6 q-pb-none"
           >
             Pokemon encontrado
           </div>
         </div>
-        <div class="row flex-center ">
+        <div class="row flex-center">
           <div class="col-md-3 col-lg-3 col-12 q-px-lg q-py-sm item__poke">
             <Item :url="currentPokemon_url" />
           </div>
@@ -56,7 +53,7 @@
         >
           <Item :url="pokemon.url" />
         </div>
-        <div class="col-12 col-md-12 q-pa-md  text-center">
+        <div class="col-12 col-md-12 q-pa-md text-center">
           <q-btn
             color="primary"
             label="Carregar mais.."
@@ -91,7 +88,7 @@ export default {
     current_id: "",
     pokemons: [],
     pokemonsList: [],
-    nextUrl: "/pokemon/"
+    nextUrl: "/pokemon/",
   }),
 
   created() {},
@@ -103,7 +100,7 @@ export default {
       this.$q.notify({
         type: "positive",
         position: "top",
-        message: `Pokemon encontrado.`
+        message: `Pokemon encontrado.`,
       });
     },
 
@@ -111,7 +108,7 @@ export default {
       this.$q.notify({
         type: "negative",
         position: "top",
-        message: `Ops, parece que este não existe..`
+        message: `Ops, parece que este não existe..`,
       });
     },
     showLoading() {
@@ -135,13 +132,13 @@ export default {
     },
     async getAPI() {
       this.showLoading();
-      await api.get(this.nextUrl).then(res => {
+      await api.get(this.nextUrl).then((res) => {
         this.nextUrl = res.data.next;
         this.pokemons.push(...res.data.results);
         this.hideLoading();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -156,7 +153,7 @@ export default {
   color: white;
   font-size: 10px;
 }
-.pokemon__text a{
-    color: white;
+.pokemon__text a {
+  color: white;
 }
 </style>

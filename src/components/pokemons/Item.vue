@@ -1,16 +1,20 @@
 <template>
-  <q-card class="my-card  q-pa-sm">
-    <div class="poke-card">
+  <q-card class="my-card q-pa-sm">
+    <div
+      class="poke-card"
+      v-if="currentPokemon.types"
+      :style="'background-color:' + getColor"
+    >
       <div
         class="col-md-12 pokemon__card-number flex justify-between items-center"
       >
         <div class="text-h6 text-capitalize q-pa-xs">
-          #{{ currentPokemon.id }} {{ currentPokemon.name }}
+          {{ currentPokemon.name }}
         </div>
         <small class="pokemon__card-HP"> HP: {{ currentPokemon.hp }}</small>
       </div>
       <div
-        class="text-center pokemon__card-image flex items-center justify-center q-pa-lg"
+        class="text-center pokemon__card-image q-px-lg flex items-center justify-center q-pt-lg"
       >
         <img class="pokemon__card-image-img" :src="currentPokemon.image" />
         <div class="pokemon__skills">
@@ -24,7 +28,7 @@
           </div>
         </div>
       </div>
-      <q-card-section class="text-center ">
+      <q-card-section class="text-center">
         <div class="col-md-12 items-center justify-center flex">
           <q-btn label="Detalhes" color="primary" @click="handleOpenDialog" />
         </div>
@@ -38,7 +42,7 @@
         >
           <q-card
             class="bg-grey-10 text-white full-height"
-            style="width:100%; max-width: 100vw;"
+            style="width: 100%; max-width: 100vw"
           >
             <q-card-section class="text-center">
               <div class="text-h6 text-capitalize">
@@ -52,7 +56,7 @@
             >
               <div class="itemtrst full-width">
                 <div class="row">
-                  <div class="col-md-12 text-center full-width ">
+                  <div class="col-md-12 text-center full-width">
                     <div class="pokemon__modal-image">
                       <img
                         class="pokemon__modal-image-img q-pa-md"
@@ -68,7 +72,7 @@
                     </div>
 
                     <div
-                      class="row flex  q-pa-md bg-black text-white flex-center justify-around"
+                      class="row flex q-pa-md bg-black text-white flex-center justify-around"
                     >
                       <div>
                         <span
@@ -83,7 +87,7 @@
                   </div>
                   <div class="col-md-12 full-width">
                     <div
-                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-around "
+                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-around"
                     >
                       <div
                         class="col-6 text-center pokemon__modal__skills-item text-capitalize"
@@ -112,7 +116,7 @@
                     </div>
 
                     <div
-                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-around "
+                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-around"
                     >
                       <div class="pokemon__modal__skills-item">
                         Altura: {{ currentPokemon.height }} m
@@ -173,8 +177,16 @@ export default {
   props: {
     url: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
+  },
+  computed: {
+    getColor() {
+      console.log(this.pokemontypes[this.currentPokemon.types[0].type.name]);
+      console.log(this.currentPokemon.types[0].type.name);
+
+      return this.pokemontypes[this.currentPokemon.types[0].type.name];
+    },
   },
   data: () => ({
     openDialog: false,
@@ -184,11 +196,33 @@ export default {
       name: "",
       shape: "",
       id: "",
-      type: ""
+      type: "",
     },
-    pokemontypes: [
-     { "Normal": '#98c84c'},
-      {"Fire": 'red'},
+    pokemontypes: {
+      normal: "#98c84c",
+      fire: "#d22f33",
+      water: "#00a2de",
+      grass: "#99c74c",
+      ground: "#eb8b0b",
+      flying: "#fff",
+      fighting: "#fff",
+      poison: "#b377b3",
+      electric: "#efea2b",
+
+      rock: "#eb8b0b",
+      psychic: "#794e9e",
+      ice: "#a8d7f2",
+      bug: "#b5d169",
+      ghost: "#b380ac",
+      steel: "#97a3a9",
+      dragon: "#d7ba07",
+      dark: "#184f55",
+      fairy: "#d75684",
+    },
+
+    pokemontypes2: [
+      { Normal: "#98c84c" },
+      { Fire: "red" },
       "Water",
       "Grass",
       "Flying",
@@ -204,16 +238,16 @@ export default {
       "Steel",
       "Dragon",
       "Dark",
-      "Fairy"
-    ]
+      "Fairy",
+    ],
   }),
   created() {
     this.getPokeByURL();
   },
   watch: {
-    url: function() {
+    url: function () {
       this.getPokeByURL();
-    }
+    },
   },
   methods: {
     async handleOpenDialog() {
@@ -228,7 +262,7 @@ export default {
     getPokeByURL() {
       api
         .get(this.url)
-        .then(response => {
+        .then((response) => {
           this.currentPokemon.name = response.data.name;
           this.currentPokemon.types = response.data.types;
           this.currentPokemon.id = response.data.id;
@@ -254,19 +288,19 @@ export default {
           this.$q.notify({
             type: "negative",
             position: "top",
-            message: `Ops, parece que este não existe..`
+            message: `Ops, parece que este não existe..`,
           });
         });
     },
     async getPokeSpecie(url) {
-      await api.get(url).then(response => {
+      await api.get(url).then((response) => {
         this.currentPokemon.egg_groups = response.data.egg_groups;
         this.currentPokemon.shape = response.data.shape || "";
         this.currentPokemon.flavor_text_entries =
           response.data.flavor_text_entries;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -329,7 +363,7 @@ export default {
   height: 163px;
   opacity: 1;
   max-width: 100%;
-  animation: pulse 1.3s infinite;
+  animation: pulse 1s infinite;
   animation-direction: alternate;
   animation-name: pulse;
   border-radius: 5px;
@@ -366,7 +400,7 @@ export default {
     filter: brightness(100%);
   }
   100% {
-    filter: brightness(120%);
+    filter: brightness(125%);
   }
 }
 </style>
