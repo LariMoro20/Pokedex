@@ -1,8 +1,6 @@
 <template>
   <q-page class="bg-black">
-    <Header />
-    <div class="col-12 pokemon__text text-center"></div>
-    <div class="row q-pt-md q-pa-lg bg-red-10 full-width flex flex-center">
+    <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
       <div class="col-md-5 col-12">
         <q-input
           dense
@@ -29,6 +27,8 @@
       Esta aplicação utiliza a api
       <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
     </div>
+
+    <Header />
 
     <div class="container q-pa-lg">
       <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
