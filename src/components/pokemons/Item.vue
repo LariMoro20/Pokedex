@@ -35,9 +35,9 @@
         </div>
       </div>
       <q-card-section class="text-center">
-        <div class="col-md-12 items-center justify-center flex">
+        <!--<div class="col-md-12 items-center justify-center flex">
           <q-btn label="Detalhes" color="primary" @click="handleOpenDialog" />
-        </div>
+        </div>-->
 
         <q-dialog
           class="bg-grey-10 text-white q-pa-none"
@@ -361,7 +361,7 @@ export default {
   background: url("/pokemons/fundo-poke.jpg") 50% no-repeat;
   background-size: cover;
   position: absolute;
-  top: 36%;
+  top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 87%;
