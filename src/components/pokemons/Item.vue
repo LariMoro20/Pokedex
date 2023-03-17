@@ -3,28 +3,34 @@
     <div
       class="poke-card"
       v-if="currentPokemon.types"
-      :style="'background-color:' + getColor"
+      :style="'background-color:' + getColor.background"
     >
       <div
         class="col-md-12 pokemon__card-number flex justify-between items-center"
       >
-        <div class="text-h6 text-capitalize q-pa-xs">
+        <div
+          class="text-h6 text-capitalize q-pa-xs"
+          :style="'color:' + getColor.color"
+        >
           {{ currentPokemon.name }}
         </div>
-        <small class="pokemon__card-HP"> HP: {{ currentPokemon.hp }}</small>
+        <small class="pokemon__card-HP" :style="'color:' + getColor.color">
+          HP: {{ currentPokemon.hp }}</small
+        >
       </div>
       <div
-        class="text-center pokemon__card-image q-px-lg flex items-center justify-center q-pt-lg"
+        class="text-center pokemon__card-image q-px-lg flex items-center justify-center q-pt-md"
       >
         <img class="pokemon__card-image-img" :src="currentPokemon.image" />
         <div class="pokemon__skills">
           <div class="pokemon__skills-item">
-            Ataque: {{ currentPokemon.attack }}<br />
-            Ataque esp.: {{ currentPokemon.special_attack }}
+            <b> Ataque:</b> {{ currentPokemon.attack }}<br />
+            <b> Defesa:</b> {{ currentPokemon.defense }}
           </div>
           <div class="pokemon__skills-item">
-            Defesa: {{ currentPokemon.defense }}<br />
-            Defesa esp.: {{ currentPokemon.special_defense }}
+            <b> Ataque V:</b> {{ currentPokemon.special_attack }}<br />
+            <b> Defesa V:</b>
+            {{ currentPokemon.special_defense }}
           </div>
         </div>
       </div>
@@ -182,10 +188,9 @@ export default {
   },
   computed: {
     getColor() {
-      console.log(this.pokemontypes[this.currentPokemon.types[0].type.name]);
-      console.log(this.currentPokemon.types[0].type.name);
-
-      return this.pokemontypes[this.currentPokemon.types[0].type.name];
+      let bgcolor = this.pokemontypes[this.currentPokemon.types[0].type.name];
+      let color = bgcolor === "#fff" ? "black" : "white";
+      return { background: bgcolor, color: color };
     },
   },
   data: () => ({
@@ -390,8 +395,11 @@ export default {
   font-size: 1rem;
 }
 .pokemon__card-number {
-  background-color: #c10015;
-  border-radius: 0px 18px 0px 21px;
+  /*background-color: #c10015;
+  border-radius: 0px 18px 0px 21px;*/
+
+  padding-left: 10px;
+  padding-right: 10px;
   color: white;
 }
 
