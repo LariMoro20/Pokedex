@@ -1,37 +1,51 @@
-# Pokedex (pokedex)
+# Pokedex
 
-A Quasar Framework app
+Aplicação SPA desenvolvida em Vue.js utilizando Quasar framework.
 
-## Install the dependencies
+Para visualizar o layout: https://pokedex-larisantos.vercel.app/
+
+![imagem](https://github.com/LariMoro20/PokemonApp/blob/main/appPoke2.png)
+
+## :books: Tecnologias
+
+- Vue 3 -> https://vuejs.org/
+- Quasar framework -> https://quasar.dev/
+
+### Contém 
+- Reatividade;
+- Componentização;
+- LocalStorage;
+- Roteamento;
+- Consumo de API;
+- Gerenciamento de Estado (vuex store);
+- Configuração de arquivos de boot do Quasar.
+
+
+## :hammer: Instalação
 
 ```bash
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Rodar a aplicação ambiente DEV:
 
 ```bash
 quasar dev
 ```
 
-### Lint the files
-
-```bash
-npm run lint
-```
-
-### Format the files
-
-```bash
-npm run format
-```
-
-### Build the app for production
+### Build da aplicação em SPA
 
 ```bash
 quasar build
+cd dist/spa
+quasar serve
 ```
 
-### Customize the configuration
+## :star: Artes e conteúdos 
+- Logotipo: https://logodownload.org/pokemon-logo/
 
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+## :clipboard: Licença
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+Made with :heart: by [Larissa Santos](https://larissa-santos.vercel.app/)
+
