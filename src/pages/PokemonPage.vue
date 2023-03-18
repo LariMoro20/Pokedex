@@ -1,6 +1,6 @@
 <template>
-  <q-page class="bg-black">
-    <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
+  <q-page class="poke__page">
+    <!-- <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
       <div class="col-md-5 col-12">
         <q-input
           dense
@@ -22,14 +22,13 @@
           </template>
         </q-input>
       </div>
-    </div>
+    </div>-->
+
+    <Header />
     <div class="col-12 pokemon__text text-center">
       Esta aplicação utiliza a api
       <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
     </div>
-
-    <Header />
-
     <div class="container q-pa-lg">
       <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
         <div class="row flex-center">
@@ -75,71 +74,71 @@
 </template>
 
 <script>
-import Header from "src/components/Parts/Header.vue";
-import Item from "src/components/pokemons/Item.vue";
+import Header from 'src/components/Parts/Header.vue'
+import Item from 'src/components/pokemons/Item.vue'
 
-import api from "../services/api";
+import api from '../services/api'
 export default {
   components: { Header },
-  name: "PokemonPage",
+  name: 'PokemonPage',
   components: { Header, Item },
   data: () => ({
-    currentPokemon_url: "",
-    current_id: "",
+    currentPokemon_url: '',
+    current_id: '',
     pokemons: [],
     pokemonsList: [],
-    nextUrl: "/pokemon/",
+    nextUrl: '/pokemon/'
   }),
 
-  created() {},
-  async mounted() {
-    await this.getAPI();
+  created () {},
+  async mounted () {
+    await this.getAPI()
   },
   methods: {
-    triggerPositive() {
+    triggerPositive () {
       this.$q.notify({
-        type: "positive",
-        position: "top",
-        message: `Pokemon encontrado.`,
-      });
+        type: 'positive',
+        position: 'top',
+        message: `Pokemon encontrado.`
+      })
     },
 
-    triggerNegative() {
+    triggerNegative () {
       this.$q.notify({
-        type: "negative",
-        position: "top",
-        message: `Ops, parece que este não existe..`,
-      });
+        type: 'negative',
+        position: 'top',
+        message: `Ops, parece que este não existe..`
+      })
     },
-    showLoading() {
-      this.$q.loading.show();
+    showLoading () {
+      this.$q.loading.show()
     },
-    hideLoading() {
-      this.$q.loading.hide();
+    hideLoading () {
+      this.$q.loading.hide()
     },
-    setCurrentPokemon() {
+    setCurrentPokemon () {
       this.currentPokemon_url =
-        "https://pokeapi.co/api/v2/pokemon/" + this.current_id.toLowerCase();
+        'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()
     },
 
-    goBack() {
-      this.currentPokemon.id = this.currentPokemon.id - 1;
-      this.getAPI(this.currentPokemon.id);
+    goBack () {
+      this.currentPokemon.id = this.currentPokemon.id - 1
+      this.getAPI(this.currentPokemon.id)
     },
-    goNext() {
-      this.currentPokemon.id = this.currentPokemon.id + 1;
-      this.getAPI(this.currentPokemon.id);
+    goNext () {
+      this.currentPokemon.id = this.currentPokemon.id + 1
+      this.getAPI(this.currentPokemon.id)
     },
-    async getAPI() {
-      this.showLoading();
-      await api.get(this.nextUrl).then((res) => {
-        this.nextUrl = res.data.next;
-        this.pokemons.push(...res.data.results);
-        this.hideLoading();
-      });
-    },
-  },
-};
+    async getAPI () {
+      this.showLoading()
+      await api.get(this.nextUrl).then(res => {
+        this.nextUrl = res.data.next
+        this.pokemons.push(...res.data.results)
+        this.hideLoading()
+      })
+    }
+  }
+}
 </script>
 <style scoped>
 .pokemon__search-result {
@@ -155,5 +154,10 @@ export default {
 }
 .pokemon__text a {
   color: white;
+}
+.poke__page {
+  background-color: #000 !important;
+  background-image: url('/images/bg.jpg');
+  background-repeat: repeat;
 }
 </style>
