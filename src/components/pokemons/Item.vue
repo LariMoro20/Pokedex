@@ -1,10 +1,9 @@
 <template>
-  <q-card class="my-card q-pa-sm q-my-md">
-    <div
-      class="poke-card"
-      v-if="currentPokemon.types"
-      :style="'background-color:' + getColor.background"
-    >
+  <q-card
+    class="my-card q-pa-sm q-my-md"
+    v-if="currentPokemon.types && currentPokemon.image"
+  >
+    <div class="poke-card" :style="'background-color:' + getColor.background">
       <div
         class="col-md-12 pokemon__card-number flex justify-between items-center"
       >
@@ -183,10 +182,12 @@
       </q-card-section>
     </div>
   </q-card>
+  <LoadItem v-else />
 </template>
 
 <script>
 import api from '../../services/api'
+import LoadItem from 'src/components/pokemons/LoadItem.vue'
 
 export default {
   props: {
@@ -195,6 +196,7 @@ export default {
       default: ''
     }
   },
+  components: { LoadItem },
   computed: {
     getColor () {
       let bgcolor = this.pokemontypes[this.currentPokemon.types[0].type.name]

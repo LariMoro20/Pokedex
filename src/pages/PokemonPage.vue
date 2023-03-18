@@ -79,7 +79,6 @@ import Item from 'src/components/pokemons/Item.vue'
 
 import api from '../services/api'
 export default {
-  components: { Header },
   name: 'PokemonPage',
   components: { Header, Item },
   data: () => ({
