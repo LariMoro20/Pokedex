@@ -158,5 +158,6 @@ export default {
   background-color: #000 !important;
   background-image: url('/images/bg.jpg');
   background-repeat: repeat;
+  background-attachment: fixed;
 }
 </style>
