@@ -39,14 +39,14 @@
           </div>
         </div>
         <div class="row flex-center">
-          <div class="col-md-3 col-lg-3 col-12 q-px-lg q-py-sm item__poke">
+          <div class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke">
             <Item :url="currentPokemon_url" />
           </div>
         </div>
       </div>
       <div class="row flex-center">
         <div
-          class="col-md-3 col-lg-3 col-12 q-px-lg q-py-sm item__poke"
+          class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke"
           v-for="(pokemon, ikey) in pokemons"
           :key="ikey"
         >

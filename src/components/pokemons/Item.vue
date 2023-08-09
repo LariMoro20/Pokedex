@@ -19,21 +19,26 @@
       </div>
       <div
         class="text-center pokemon__card-image q-px-lg flex items-center justify-center"
+        :style="
+          'background: url(' + getColor.background_img + ') 50% no-repeat;'
+        "
       >
-        <img class="pokemon__card-image-img" :src="currentPokemon.image" />
-        <div class="pokemon__skills">
-          <div class="pokemon__skills-item" :style="'color:' + getColor.color">
-            <b> Ataque:</b> {{ currentPokemon.attack }}<br />
-            <b> Defesa:</b> {{ currentPokemon.defense }}
-          </div>
-          <div class="pokemon__skills-item" :style="'color:' + getColor.color">
-            <b> Ataque V:</b> {{ currentPokemon.special_attack }}<br />
-            <b> Defesa V:</b>
-            {{ currentPokemon.special_defense }}
-          </div>
+        <div>
+          <img class="pokemon__card-image-img" :src="currentPokemon.image" />
         </div>
       </div>
-      <div class="text-right q-px-sm flex items-end">
+      <div class="pokemon__skills items-center justify-center">
+        <div class="pokemon__skills-item" :style="'color:' + getColor.color">
+          <b> Ataque:</b> {{ currentPokemon.attack }}<br />
+          <b> Defesa:</b> {{ currentPokemon.defense }}
+        </div>
+        <div class="pokemon__skills-item" :style="'color:' + getColor.color">
+          <b> Ataque V:</b> {{ currentPokemon.special_attack }}<br />
+          <b> Defesa V:</b>
+          {{ currentPokemon.special_defense }}
+        </div>
+      </div>
+      <div class="q-px-md flex items-end">
         <p
           v-if="currentPokemon.flavor_text_entries"
           style="font-size: 10px; margin: 0"
@@ -43,22 +48,16 @@
         </p>
       </div>
       <q-card-section class="text-center">
-        <!-- <div class="col-md-12 items-center justify-center flex">
+        <div class="col-md-12 items-center justify-center flex">
           <q-btn label="Detalhes" color="primary" @click="handleOpenDialog" />
-        </div>-->
+        </div>
 
         <q-dialog
-          class="bg-grey-10 text-white q-pa-none"
+          class="text-white no-scroll q-pa-none no-scroll"
           v-model="openDialog"
-          full-width
-          :maximized="maximizedToggle"
-          persistent
         >
-          <q-card
-            class="bg-grey-10 text-white full-height"
-            style="width: 100%; max-width: 100vw"
-          >
-            <q-card-section class="text-center">
+          <q-card class="bg-grey-10 no-scroll text-white full-height">
+            <q-card-section class="text-center q-pa-sm">
               <div class="text-h6 text-capitalize">
                 #{{ currentPokemon.id }} {{ currentPokemon.name }}
               </div>
@@ -73,7 +72,7 @@
                   <div class="col-md-12 text-center full-width">
                     <div class="pokemon__modal-image">
                       <img
-                        class="pokemon__modal-image-img q-pa-md"
+                        class="pokemon__modal-image-img q-pa-sm"
                         :src="currentPokemon.image"
                       />
                     </div>
@@ -199,9 +198,20 @@ export default {
   components: { LoadItem },
   computed: {
     getColor () {
-      let bgcolor = this.pokemontypes[this.currentPokemon.types[0].type.name]
+      let bgcolor =
+        this.pokemontypes[this.currentPokemon.types[0].type.name].color
       let color = bgcolor === '#184f55' ? 'white' : 'black'
-      return { background: bgcolor, color: color }
+      let background_img = this.pokemontypes[
+        this.currentPokemon.types[0].type.name
+      ].bg
+        ? '/pokemons/' +
+          this.pokemontypes[this.currentPokemon.types[0].type.name].bg
+        : '/pokemons/fundo-poke.jpg'
+      return {
+        background: bgcolor,
+        color: color,
+        background_img: background_img
+      }
     }
   },
   data: () => ({
@@ -215,25 +225,24 @@ export default {
       type: ''
     },
     pokemontypes: {
-      normal: '#98c84c',
-      fire: '#f1523c',
-      water: '#2eb0e5',
-      grass: '#99c74c',
-      ground: '#eb8b0b',
-      flying: '#fff',
-      fighting: '#fff',
-      poison: '#b377b3',
-      electric: '#efea2b',
-
-      rock: '#eb8b0b',
-      psychic: '#794e9e',
-      ice: '#a8d7f2',
-      bug: '#b5d169',
-      ghost: '#b380ac',
-      steel: '#97a3a9',
-      dragon: '#d7ba07',
-      dark: '#184f55',
-      fairy: '#d75684'
+      normal: { color: '#98c84c', bg: 'fundo-poke.jpg' },
+      fire: { color: '#f1523c', bg: 'bg_fire.png' },
+      water: { color: '#2eb0e5', bg: 'bg_water.png' },
+      grass: { color: '#99c74c', bg: 'bg_grass.png' },
+      ground: { color: '#eb8b0b', bg: 'fundo-poke.jpg' },
+      flying: { color: '#fff', bg: 'bg_fly.png' },
+      fighting: { color: '#fff', bg: 'fundo_fighting.png' },
+      poison: { color: '#b377b3', bg: 'fundo_psychic.png' },
+      electric: { color: '#efea2b', bg: 'fundo_electric.png' },
+      rock: { color: '#eb8b0b', bg: '' },
+      psychic: { color: '#794e9e', bg: 'fundo_psychic.png' },
+      ice: { color: '#a8d7f2', bg: '' },
+      bug: { color: '#b5d169', bg: '' },
+      ghost: { color: '#b380ac', bg: 'fundo_ghost.png' },
+      steel: { color: '#97a3a9', bg: '' },
+      dragon: { color: '#d7ba07', bg: '' },
+      dark: { color: '#184f55', bg: '' },
+      fairy: { color: '#d75684', bg: '' }
     },
 
     pokemontypes2: [
@@ -324,7 +333,7 @@ export default {
 
 <style scoped>
 .my-card {
-  background-color: yellow;
+  background-color: #e2e2e2;
 }
 .poke-card {
   background-color: #fff;
@@ -373,37 +382,35 @@ export default {
 }
 .pokemon__modal-image::before {
   content: '';
-  background: url('/pokeball.png') 50% no-repeat;
 }
 .pokemon__types-item {
   background-color: white;
+  font-size: 0.7rem;
   color: black;
   padding: 5px;
   margin: 5px;
   border-radius: 10px;
 }
 .pokemon__types-item-type {
-  font-size: 1rem;
+  font-size: 0.7rem;
   padding: 10px;
   margin: 10px;
   color: black;
 }
-.pokemon__card-image::before {
-  content: '';
-  background: url('/pokemons/fundo-poke.jpg') 50% no-repeat;
-  background-size: cover;
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 87%;
+.pokemon__card-image {
+  position: inherit;
+  width: 94%;
   height: 163px;
   opacity: 1;
   max-width: 100%;
-  animation: pulse 1s infinite;
+  animation: pulse-d20cb5fc 1s infinite;
+  animation-name: pulse-d20cb5fc;
+  animation-direction: normal;
   animation-direction: alternate;
-  animation-name: pulse;
+  animation-name: pulse-d20cb5fc;
   border-radius: 5px;
+  border: 3px groove;
+  margin: auto;
   border: 3px groove;
 }
 .pokemon__skills {
