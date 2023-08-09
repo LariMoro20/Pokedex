@@ -413,11 +413,10 @@ export default {
   height: 163px;
   opacity: 1;
   max-width: 100%;
-  animation: pulse-d20cb5fc 1s infinite;
-  animation-name: pulse-d20cb5fc;
+  animation: pulse 1s infinite;
+  animation-name: pulse;
   animation-direction: normal;
   animation-direction: alternate;
-  animation-name: pulse-d20cb5fc;
   border-radius: 5px;
   border: 3px groove;
   margin: auto;
