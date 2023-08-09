@@ -105,7 +105,7 @@
                       <div
                         class="col-6 text-center pokemon__modal__skills-item text-capitalize"
                       >
-                        Habilidade:
+                        Habilidade:<br />
                         <span
                           class="pokemon__types-item text-capitalize"
                           v-for="(hability, ikey) in currentPokemon.abilities"
@@ -117,7 +117,7 @@
                       <div
                         class="col-6 text-center pokemon__modal__skills-item text-capitalize"
                       >
-                        Grupo de ovos:
+                        Grupo de ovos:<br />
                         <span
                           class="pokemon__types-item text-capitalize"
                           v-for="(egg, ikey) in currentPokemon.egg_groups"
@@ -252,28 +252,7 @@ export default {
       dragon: { color: '#d7ba07', bg: '' },
       dark: { color: '#184f55', bg: '' },
       fairy: { color: '#d75684', bg: '' }
-    },
-
-    pokemontypes2: [
-      { Normal: '#98c84c' },
-      { Fire: 'red' },
-      'Water',
-      'Grass',
-      'Flying',
-      'Fighting',
-      'Poison',
-      'Electric',
-      'Ground',
-      'Rock',
-      'Psychic',
-      'Ice',
-      'Bug',
-      'Ghost',
-      'Steel',
-      'Dragon',
-      'Dark',
-      'Fairy'
-    ]
+    }
   }),
   created () {
     this.getPokeByURL()
