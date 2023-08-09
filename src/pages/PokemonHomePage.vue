@@ -1,6 +1,5 @@
 <template>
   <q-page class="poke__page">
-    <Header />
     <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
       <div class="col-md-5 col-12">
         <q-input
@@ -22,11 +21,6 @@
           </template>
         </q-input>
       </div>
-    </div>
-
-    <div class="col-12 pokemon__text text-center">
-      Esta aplicação utiliza a api
-      <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
     </div>
     <div class="container q-pa-lg">
       <q-dialog
@@ -76,13 +70,12 @@
 </template>
 
 <script>
-import Header from 'src/components/Parts/Header.vue'
 import Item from 'src/components/pokemons/Item.vue'
 
 import api from '../services/api'
 export default {
   name: 'PokemonPage',
-  components: { Header, Item },
+  components: { Item },
   data: () => ({
     currentPokemon_url: '',
     current_id: '',
@@ -150,14 +143,7 @@ export default {
 .item__poke {
   width: 300px;
 }
-.pokemon__text {
-  background-color: #17244c;
-  color: white;
-  font-size: 10px;
-}
-.pokemon__text a {
-  color: white;
-}
+
 .poke__page {
   background-color: #000 !important;
   background-image: url('/images/bg.jpg');
