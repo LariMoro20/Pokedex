@@ -5,6 +5,7 @@
       <div class="col-md-5 col-12">
         <q-input
           dense
+          flat
           color="white"
           label-color="black"
           bg-color="white"
@@ -35,7 +36,7 @@
       >
         <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
           <div class="row flex-center">
-            <div class="text-h6 q-pl-lg">Pokemon encontrado</div>
+            <div class="text-h6 q-pl-lg">Pesquisa: {{ current_id }}</div>
             <q-space />
             <q-btn icon="close" flat round dense v-close-popup />
           </div>
