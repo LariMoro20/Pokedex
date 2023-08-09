@@ -8,6 +8,7 @@
           color="white"
           label-color="black"
           bg-color="white"
+          @keydown.enter.prevent="setCurrentPokemon"
           outlined
           v-model="current_id"
           placeholder="Pesquisar o pokemon (digite o nome ou id)"
