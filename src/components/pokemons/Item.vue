@@ -181,7 +181,15 @@
       </q-card-section>
     </div>
   </q-card>
-  <LoadItem v-else />
+  <LoadItem v-else-if="!error_poke" />
+
+  <q-card class="my-card" v-else>
+    <q-img src="/notfoundPoke.png">
+      <div class="absolute-bottom text-subtitle2 text-center">
+        Pokemon não encontrado..
+      </div>
+    </q-img>
+  </q-card>
 </template>
 
 <script>
@@ -217,6 +225,7 @@ export default {
   data: () => ({
     openDialog: false,
     maximizedToggle: true,
+    error_poke: false,
     currentPokemon: {
       id: '',
       name: '',
@@ -314,9 +323,10 @@ export default {
         .catch(() => {
           this.$q.notify({
             type: 'negative',
-            position: 'top',
+            position: 'bottom',
             message: `Ops, parece que este não existe..`
           })
+          this.error_poke = true
         })
     },
     async getPokeSpecie (url) {

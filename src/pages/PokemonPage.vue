@@ -1,14 +1,13 @@
 <template>
   <q-page class="poke__page">
-    <!-- <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
+    <Header />
+    <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
       <div class="col-md-5 col-12">
         <q-input
           dense
           color="white"
           label-color="black"
-          borderless
           bg-color="white"
-          rounded
           outlined
           v-model="current_id"
           placeholder="Pesquisar o pokemon (digite o nome ou id)"
@@ -22,28 +21,30 @@
           </template>
         </q-input>
       </div>
-    </div>-->
+    </div>
 
-    <Header />
     <div class="col-12 pokemon__text text-center">
       Esta aplicação utiliza a api
       <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
     </div>
     <div class="container q-pa-lg">
-      <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
-        <div class="row flex-center">
-          <div
-            class="col-12 col-md-12 text-white text-center text-h6 q-pb-none"
-          >
-            Pokemon encontrado
+      <q-dialog
+        class="text-white no-scroll q-pa-none no-scroll"
+        v-model="openModal"
+      >
+        <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
+          <div class="row flex-center">
+            <div class="text-h6 q-pl-lg">Pokemon encontrado</div>
+            <q-space />
+            <q-btn icon="close" flat round dense v-close-popup />
+          </div>
+          <div class="row flex-center">
+            <div class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke">
+              <Item :url="currentPokemon_url" />
+            </div>
           </div>
         </div>
-        <div class="row flex-center">
-          <div class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke">
-            <Item :url="currentPokemon_url" />
-          </div>
-        </div>
-      </div>
+      </q-dialog>
       <div class="row flex-center">
         <div
           class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke"
@@ -84,6 +85,7 @@ export default {
   data: () => ({
     currentPokemon_url: '',
     current_id: '',
+    openModal: false,
     pokemons: [],
     pokemonsList: [],
     nextUrl: '/pokemon/'
@@ -118,6 +120,7 @@ export default {
     setCurrentPokemon () {
       this.currentPokemon_url =
         'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()
+      if (this.currentPokemon_url) this.openModal = true
     },
 
     goBack () {
@@ -141,7 +144,7 @@ export default {
 </script>
 <style scoped>
 .pokemon__search-result {
-  background-color: #afafaf54;
+  background-color: #afafafe3;
 }
 .item__poke {
   width: 300px;
