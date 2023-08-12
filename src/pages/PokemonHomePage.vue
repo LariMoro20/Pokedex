@@ -1,27 +1,5 @@
 <template>
   <q-page class="poke__page">
-    <div class="row q-pt-sm q-pa-sm bg-red-10 full-width flex flex-center">
-      <div class="col-md-5 col-12">
-        <q-input
-          dense
-          color="white"
-          label-color="black"
-          bg-color="white"
-          @keydown.enter.prevent="setCurrentPokemon"
-          outlined
-          v-model="current_id"
-          placeholder="Pesquisar o pokemon (digite o nome ou id)"
-        >
-          <template v-slot:after>
-            <q-btn
-              label="Procurar"
-              @click="setCurrentPokemon"
-              class="full-height full-width text-black bg-secondary"
-            />
-          </template>
-        </q-input>
-      </div>
-    </div>
     <div class="container q-pa-lg">
       <q-dialog
         class="text-white no-scroll q-pa-none no-scroll"
@@ -110,11 +88,6 @@ export default {
     },
     hideLoading () {
       this.$q.loading.hide()
-    },
-    setCurrentPokemon () {
-      this.currentPokemon_url =
-        'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()
-      if (this.currentPokemon_url) this.openModal = true
     },
 
     goBack () {

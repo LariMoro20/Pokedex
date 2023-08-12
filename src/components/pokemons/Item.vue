@@ -41,7 +41,7 @@
       <div class="q-px-md flex items-end">
         <p
           v-if="currentPokemon.flavor_text_entries"
-          style="font-size: 10px; margin: 0"
+          :style="'font-size: 10px; margin: 0; color:' + getColor.color"
           class="q-pt-sm q-pb-sm q-pr-none"
         >
           {{ currentPokemon.flavor_text_entries[0].flavor_text }}
@@ -105,7 +105,7 @@
                       <div
                         class="col-6 text-center pokemon__modal__skills-item text-capitalize"
                       >
-                        Habilidade:
+                        Habilidade:<br />
                         <span
                           class="pokemon__types-item text-capitalize"
                           v-for="(hability, ikey) in currentPokemon.abilities"
@@ -195,6 +195,7 @@
 <script>
 import api from '../../services/api'
 import LoadItem from 'src/components/pokemons/LoadItem.vue'
+import { pokemontypes } from 'assets/pokemonTypes'
 
 export default {
   props: {
@@ -208,7 +209,8 @@ export default {
     getColor () {
       let bgcolor =
         this.pokemontypes[this.currentPokemon.types[0].type.name].color
-      let color = bgcolor === '#184f55' ? 'white' : 'black'
+      let color =
+        this.pokemontypes[this.currentPokemon.types[0].type.name].textColor
       let background_img = this.pokemontypes[
         this.currentPokemon.types[0].type.name
       ].bg
@@ -233,47 +235,7 @@ export default {
       id: '',
       type: ''
     },
-    pokemontypes: {
-      normal: { color: '#98c84c', bg: 'fundo-poke.jpg' },
-      fire: { color: '#f1523c', bg: 'bg_fire.png' },
-      water: { color: '#2eb0e5', bg: 'bg_water.png' },
-      grass: { color: '#99c74c', bg: 'bg_grass.png' },
-      ground: { color: '#eb8b0b', bg: 'fundo-poke.jpg' },
-      flying: { color: '#fff', bg: 'bg_fly.png' },
-      fighting: { color: '#fff', bg: 'fundo_fighting.png' },
-      poison: { color: '#b377b3', bg: 'fundo_psychic.png' },
-      electric: { color: '#efea2b', bg: 'fundo_electric.png' },
-      rock: { color: '#eb8b0b', bg: '' },
-      psychic: { color: '#794e9e', bg: 'fundo_psychic.png' },
-      ice: { color: '#a8d7f2', bg: '' },
-      bug: { color: '#b5d169', bg: '' },
-      ghost: { color: '#b380ac', bg: 'fundo_ghost.png' },
-      steel: { color: '#97a3a9', bg: '' },
-      dragon: { color: '#d7ba07', bg: '' },
-      dark: { color: '#184f55', bg: '' },
-      fairy: { color: '#d75684', bg: '' }
-    },
-
-    pokemontypes2: [
-      { Normal: '#98c84c' },
-      { Fire: 'red' },
-      'Water',
-      'Grass',
-      'Flying',
-      'Fighting',
-      'Poison',
-      'Electric',
-      'Ground',
-      'Rock',
-      'Psychic',
-      'Ice',
-      'Bug',
-      'Ghost',
-      'Steel',
-      'Dragon',
-      'Dark',
-      'Fairy'
-    ]
+    pokemontypes
   }),
   created () {
     this.getPokeByURL()

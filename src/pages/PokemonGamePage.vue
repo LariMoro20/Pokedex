@@ -7,29 +7,47 @@
         </div>
         <div
           class="col-md-3 col-lg-4 col-12 q-px-lg text-center"
-          v-if="currentPokemon.types && currentPokemon.image"
+          v-if="currentPokemon.image"
         >
           <img
             class="pokemon-img"
             :src="currentPokemon.image"
-            :style="'filter: brightness(' + isWin + ');'"
+            :style="'filter: brightness(' + endGame + ');'"
           />
         </div>
         <div class="col-md-12 text-center text-white">
+          <div class="row flex q-pa-md text-white flex-center justify-center">
+            <div v-for="(type, ikey) in currentPokemon.types" :key="ikey">
+              <span
+                class="pokemon__types-item pokemon__types-item-type q-pa-sm text-capitalize"
+                :style="
+                  'background-color:' +
+                  getColor(type.type.name).background +
+                  '; color:' +
+                  getColor(type.type.name).color
+                "
+                rounded
+              >
+                {{ type.type.name }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center text-white" v-if="errors < 6">
           <h4 class="q-pa-none q-ma-none">{{ answer.join(' ') }}</h4>
-          <p class="q-ma-none q-pa-none">
-            Chances: {{ errors }}/6 {{ currentPokemon.name }}
+          <p class="q-ma-none q-pa-none" v-if="errors < 6 && endGame != 1">
+            Chances: {{ errors }}/6
           </p>
         </div>
         <div class="col-md-10 text-center flex justify-center">
           <div
             class="pokemon__game-keyboard flex"
-            v-if="errors < 6 && isWin != 1"
+            v-if="errors < 6 && endGame != 1"
           >
             <q-btn
               color="secondary"
               @click="verifyLetter(letra)"
-              class="pokemon__game-keyboard-key"
+              class="pokemon__game-keyboard-key text-black"
               v-for="(letra, key) in letters_game"
               :key="key"
               size="sm"
@@ -56,7 +74,6 @@
           <div v-else>
             <div class="text-white q-pt-md">
               <q-separator inset color="white" class="col-md-12" />
-
               <div class="text-h5 q-pt-md text-bold">PARABÉNS <br /></div>
               <p class="q-ma-none q-pa-none">Você acertou o pokémon!</p>
               <q-btn
@@ -83,7 +100,8 @@
 
 <script>
 import api from '../services/api'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
+import { pokemontypes } from 'assets/pokemonTypes'
 
 export default {
   name: 'PokemonPage',
@@ -91,7 +109,7 @@ export default {
     letters_game: ref('abcçdefghijklmnopqrstuvwxyz-'),
     letters: 'abcçdefghijklmnopqrstuvwxyz-',
     answer: ref([]),
-    isWin: ref(0),
+    endGame: ref(0),
     errors: ref(0),
     currentPokemon: {
       id: '',
@@ -99,13 +117,24 @@ export default {
       shape: '',
       id: '',
       type: ''
-    }
+    },
+    pokemontypes
   }),
 
   async mounted () {
     await this.getAPI()
   },
+
   methods: {
+    getColor (type) {
+      console.log(type.toLowerCase())
+      let bgcolor = this.pokemontypes[type.toLowerCase()].color
+      let color = this.pokemontypes[type.toLowerCase()].textColor
+      return {
+        background: bgcolor,
+        color: color
+      }
+    },
     verifyLetter (letter) {
       let letter_position = this.currentPokemon.name
         .toLowerCase()
@@ -117,6 +146,7 @@ export default {
         this.verifyWinner()
       } else {
         this.errors < 6 ? this.errors++ : ''
+        if (this.errors >= 6) this.endGame = 1
       }
       this.letters_game = this.letters_game.replace(letter, '')
     },
@@ -125,12 +155,13 @@ export default {
       this.answer = []
       this.errors = 0
       this.letters_game = this.letters
+      this.endGame = 0
       this.getAPI()
     },
 
     verifyWinner () {
       this.currentPokemon.name.toLowerCase() === this.answer.join('')
-        ? (this.isWin = 1)
+        ? (this.endGame = 1)
         : ''
     },
 
@@ -142,6 +173,7 @@ export default {
             Math.floor(Math.random() * 1010)
         )
         .then(async response => {
+          this.currentPokemon.name = response.data.name
           this.currentPokemon.name = response.data.name
           this.currentPokemon.types = response.data.types
           this.currentPokemon.id = response.data.id
@@ -187,7 +219,7 @@ export default {
 }
 
 .pokemon-img {
-  width: 80%;
+  width: 70%;
 }
 
 .pokemon__game-keyboard {

@@ -1,21 +1,48 @@
 <template>
-  <q-parallax :height="100" :speed="0.5">
-    <template v-slot:media>
-      <img src="/images/header-bkg.jpg" alt="milky way" />
-    </template>
-    <img src="/images/logo.png" class="pokemon_logotipo" alt="pokemon logo" />
-    <br />
-  </q-parallax>
-  <div class="col-12 pokemon__text text-center">
-    Esta aplicação utiliza a api
-    <a href="https://pokeapi.co/" target="_blank">https://pokeapi.co/</a>
-  </div>
+  <q-toolbar class="bg-black text-white">
+    <q-toolbar-title class="flex items-center">
+      <img src="/images/logo.png" class="pokemon_logotipo" alt="pokemon logo" />
+    </q-toolbar-title>
+    <q-btn
+      icon="search"
+      v-if="!is_show_search"
+      @click="showSearch"
+      class="q-mr-xs"
+      color="grey-9"
+    />
+
+    <PokemonSearch v-if="is_show_search" @closeSearch="showSearch" />
+
+    <q-btn
+      icon="home"
+      class="q-mr-xs"
+      color="grey-10"
+      to="/home"
+      label="Inicial"
+    />
+    <q-btn color="grey-10" icon="gamepad" label="Game" to="/game" />
+  </q-toolbar>
 </template>
 
 <script>
+import PokemonSearch from 'src/components/Pokemons/PokemonSearch.vue'
+
 export default {
-  components: {},
-  name: 'Header'
+  components: { PokemonSearch },
+  name: 'Header',
+  data: () => ({
+    is_show_search: false,
+    current_id: '',
+    openModal: false,
+    pokemons: [],
+    pokemonsList: [],
+    nextUrl: '/pokemon/'
+  }),
+  methods: {
+    showSearch () {
+      this.is_show_search = !this.is_show_search
+    }
+  }
 }
 </script>
 <style scoped>
@@ -23,7 +50,7 @@ export default {
   height: 250px;
 }
 .pokemon_logotipo {
-  width: 200px;
+  width: 100px;
 }
 .home-title {
   font-size: 2em;
