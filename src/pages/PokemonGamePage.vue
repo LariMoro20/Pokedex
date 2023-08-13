@@ -2,7 +2,7 @@
   <q-page class="poke__page flex flex-center">
     <div class="container q-pa-lg">
       <div
-        class="row flex-center"
+        class="row flex-center column"
         v-if="!request_error && currentPokemon.image"
       >
         <div class="col-md-12 text-center">
