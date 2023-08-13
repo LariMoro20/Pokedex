@@ -182,7 +182,7 @@
   <LoadItem v-else-if="!error_poke" />
 
   <q-card class="my-card" v-else>
-    <q-img src="/notfoundPoke.png">
+    <q-img src="/not_found_pikachu.png">
       <div class="absolute-bottom text-subtitle2 text-center">
         Pokemon não encontrado..
       </div>
@@ -210,8 +210,8 @@ export default {
       let bgcolor = pokemonType.color
       let color = pokemonType.textColor
       let background_img = pokemonType.bg
-        ? '/pokemons/' + pokemonType.bg
-        : '/pokemons/fundo-poke.jpg'
+        ? pokemonType.bg
+        : 'images/backgrounds_pokemons/fundo-poke.jpg'
       return {
         background: bgcolor,
         color: color,

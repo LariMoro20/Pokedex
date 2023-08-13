@@ -1,105 +1,76 @@
 <template>
   <div>
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-        <q-toolbar-title class="text-center">
+    <q-header>
+      <q-toolbar class="bg-black text-white">
+        <q-toolbar-title class="flex items-center">
           <img
-            src="https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo.png"
+            src="/images/logo.png"
             class="pokemon_logotipo"
+            alt="pokemon logo"
           />
         </q-toolbar-title>
+        <q-btn
+          icon="search"
+          v-if="!is_show_search"
+          @click="showSearch"
+          class="q-mr-xs"
+          color="grey-9"
+        >
+          <q-tooltip anchor="bottom middle" self="center middle">
+            Pesquisar Pokemon
+          </q-tooltip>
+        </q-btn>
+        <div class="col-md-5 col-12 q-mr-sm" v-if="is_show_search">
+          <PokemonSearch @closeSearch="showSearch" />
+        </div>
+        <q-btn
+          icon="home"
+          class="q-mr-xs"
+          color="grey-10"
+          to="/"
+          label="Inicial"
+        />
+        <q-btn color="grey-10" icon="gamepad" label="Game" to="/game" />
+        <q-btn color="grey-10" icon="info" label="Sobre" to="/about" />
       </q-toolbar>
     </q-header>
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-black"
-    >
-      <q-list>
-        <q-item-label color="red-10" header class="pokemon_menu-header">
-          Menu
-        </q-item-label>
-
-        <q-item
-          color="red-10"
-          clickable
-          to="/"
-          v-ripple
-          class="text-white pokemon_menu-item"
-        >
-          <q-item-section side>
-            <q-icon name="home" color="red" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Inicial</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item
-          color="red-10"
-          clickable
-          to="/about"
-          v-ripple
-          class="text-white pokemon_menu-item"
-        >
-          <q-item-section side>
-            <q-icon name="info" color="red" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Sobre</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          color="red-10"
-          clickable
-          v-ripple
-          to="/notes"
-          class="text-white pokemon_menu-item"
-        >
-          <q-item-section side>
-            <q-icon name="sticky_note_2" color="red" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Anotações</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
   </div>
 </template>
 <script>
-export default {
-  name: "MainLayout",
-  data: () => ({
-    year: new Date().getFullYear(),
-    leftDrawerOpen: false
-  })
-};
+import PokemonSearch from 'src/components/Pokemons/PokemonSearch.vue'
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  components: { PokemonSearch },
+  name: 'MainMenu',
+  setup () {
+    const is_show_search = ref(false)
+
+    const showSearch = () => {
+      is_show_search.value = !is_show_search.value
+    }
+
+    return {
+      is_show_search,
+      showSearch
+    }
+  }
+})
 </script>
 
 <style scoped>
 .pokemon_logotipo {
   width: 150px;
 }
-.pokemon_menu-header {
-  background-color: #b71c1c;
-  color: white;
-}
+
 .pokemon_menu-item {
   color: black;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.2em;
-  font-family: "Odibee Sans", cursive;
+  font-family: 'Odibee Sans', cursive;
+}
+.pokemon_logotipo {
+  width: 100px;
 }
 a {
   text-decoration: none;
