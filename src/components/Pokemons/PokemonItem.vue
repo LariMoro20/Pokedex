@@ -27,6 +27,12 @@
           <img class="pokemon__card-image-img" :src="currentPokemon.image" />
         </div>
       </div>
+      <div
+        class="pokemon__pokedex flex items-center justify-center"
+        :style="'color:' + getColor.color"
+      >
+        Número na pokedex: {{ currentPokemon.id }}
+      </div>
       <div class="pokemon__skills items-center justify-center">
         <div class="pokemon__skills-item" :style="'color:' + getColor.color">
           <b> Ataque:</b> {{ currentPokemon.attack }}<br />
@@ -38,15 +44,7 @@
           {{ currentPokemon.special_defense }}
         </div>
       </div>
-      <div class="q-px-md flex items-end">
-        <p
-          v-if="currentPokemon.flavor_text_entries"
-          style="font-size: 10px; margin: 0"
-          class="q-pt-sm q-pb-sm q-pr-none"
-        >
-          {{ currentPokemon.flavor_text_entries[0].flavor_text }}
-        </p>
-      </div>
+
       <q-card-section class="text-center">
         <div class="col-md-12 items-center justify-center flex">
           <q-btn label="Detalhes" color="primary" @click="handleOpenDialog" />
@@ -65,7 +63,7 @@
 
             <q-card-section
               class="q-pt-none scroll full-height flex items-center justify-center"
-              style="max-height: 76vh"
+              style="max-height: 72vh"
             >
               <div class="itemtrst full-width">
                 <div class="row">
@@ -167,10 +165,10 @@
 
             <q-card-actions
               align="right"
-              class="bg-grey-10 text-white text-center flex justify-center q-pb-lg"
+              class="bg-grey-10 text-white text-center flex justify-center flex-center q-pt-md q-mb-lg"
             >
               <q-btn
-                flat
+                size="md"
                 label="Fechar"
                 class="bg-red-10 col-4"
                 v-close-popup
@@ -194,7 +192,8 @@
 
 <script>
 import api from '../../services/api'
-import LoadItem from 'src/components/pokemons/LoadItem.vue'
+import LoadItem from 'src/components/Pokemons/PokemonLoad.vue'
+import { pokemontypes } from 'src/constants/pokemonTypes'
 
 export default {
   props: {
@@ -206,14 +205,12 @@ export default {
   components: { LoadItem },
   computed: {
     getColor () {
-      let bgcolor =
-        this.pokemontypes[this.currentPokemon.types[0].type.name].color
-      let color = bgcolor === '#184f55' ? 'white' : 'black'
-      let background_img = this.pokemontypes[
-        this.currentPokemon.types[0].type.name
-      ].bg
-        ? '/pokemons/' +
-          this.pokemontypes[this.currentPokemon.types[0].type.name].bg
+      let pokemonType =
+        this.pokemontypes[this.currentPokemon.types[0].type.name]
+      let bgcolor = pokemonType.color
+      let color = pokemonType.textColor
+      let background_img = pokemonType.bg
+        ? '/pokemons/' + pokemonType.bg
         : '/pokemons/fundo-poke.jpg'
       return {
         background: bgcolor,
@@ -233,6 +230,7 @@ export default {
       id: '',
       type: ''
     },
+<<<<<<< HEAD:src/components/pokemons/Item.vue
     pokemontypes: {
       normal: { color: '#98c84c', bg: 'fundo-poke.jpg' },
       fire: { color: '#f1523c', bg: 'bg_fire.png' },
@@ -253,6 +251,9 @@ export default {
       dark: { color: '#184f55', bg: '' },
       fairy: { color: '#d75684', bg: '' }
     }
+=======
+    pokemontypes
+>>>>>>> feature/poke-game:src/components/Pokemons/PokemonItem.vue
   }),
   created () {
     this.getPokeByURL()
@@ -337,8 +338,6 @@ export default {
 .pokemon__card-image-img:hover {
   transform: scale(1.1);
 }
-.pokemon__card-HP {
-}
 .pokemon__card-name {
   padding: 10px;
   padding-top: 10px;
@@ -406,7 +405,11 @@ export default {
   display: flex;
   text-align: initial;
   font-size: 12px;
-  margin-top: 26px;
+  margin-top: 5px;
+}
+
+.pokemon__pokedex {
+  font-size: 10px;
 }
 
 .pokemon__skills-item {
@@ -422,9 +425,6 @@ export default {
   font-size: 1rem;
 }
 .pokemon__card-number {
-  /*background-color: #c10015;
-  border-radius: 0px 18px 0px 21px;*/
-
   padding-left: 10px;
   padding-right: 10px;
   color: white;
