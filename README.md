@@ -1,6 +1,6 @@
 # Pokedex
 
-Aplicação de pokedex desenvolvida em Vue.js utilizando Quasar framework e dados rovidos de api externa.
+Aplicação de pokedex desenvolvida em Vue.js utilizando Quasar framework e dados providos de api externa.
 
 Para visualizar o layout: https://pokedex-larisantos.vercel.app/
 
