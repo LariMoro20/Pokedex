@@ -4,7 +4,7 @@ Aplicação SPA desenvolvida em Vue.js utilizando Quasar framework.
 
 Para visualizar o layout: https://pokedex-larisantos.vercel.app/
 
-![imagem](https://github.com/LariMoro20/Pokedex/blob/main/appPoke.png)
+![imagem](https://github.com/LariMoro20/Pokedex/blob/main/pokemon.png)
 
 ## :books: Tecnologias
 
