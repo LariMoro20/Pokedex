@@ -3,10 +3,10 @@
     <div class="container q-pa-md">
       <div class="row flex-center">
         <div class="col-md-12 text-center">
-          <div class="text-h6 text-white">Quem é esse pokemon?</div>
+          <div class="text-h6 text-white text-bold">Quem é esse pokemon?</div>
         </div>
         <div
-          class="col-md-3 col-lg-4 col-12 q-px-lg text-center"
+          class="col-md-3 col-lg-12 col-12 q-px-lg text-center"
           v-if="currentPokemon.image"
         >
           <img
@@ -15,7 +15,7 @@
             :style="'filter: brightness(' + endGame + ');'"
           />
         </div>
-        <div class="col-md-12 text-center text-white">
+        <div class="col-12 text-center text-white">
           <div class="row flex q-pa-md text-white flex-center justify-center">
             <div v-for="(type, ikey) in currentPokemon.types" :key="ikey">
               <span
@@ -33,13 +33,13 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12 text-center text-white" v-if="errors < 6">
+        <div class="col-12 text-center text-white" v-if="errors < 6">
           <h4 class="q-pa-none q-ma-none">{{ answer.join(' ') }}</h4>
           <p class="q-ma-none q-pa-none" v-if="errors < 6 && endGame != 1">
             Chances: {{ errors }}/6
           </p>
         </div>
-        <div class="col-md-10 text-center flex justify-center">
+        <div class="col-md-10 col-12 text-center flex justify-center">
           <div
             class="pokemon__game-keyboard flex"
             v-if="errors < 6 && endGame != 1"
@@ -66,7 +66,7 @@
               <q-btn
                 color="primary"
                 class="q-ma-md"
-                label="Jogar de novo?"
+                label="Novo jogo"
                 @click="restartGame()"
               />
             </div>
@@ -101,13 +101,13 @@
 <script>
 import api from '../services/api'
 import { ref } from 'vue'
-import { pokemontypes } from 'assets/pokemonTypes'
+import { pokemontypes } from 'src/constants/pokemonTypes'
 
 export default {
   name: 'PokemonPage',
   data: () => ({
-    letters_game: ref('abcçdefghijklmnopqrstuvwxyz-'),
-    letters: 'abcçdefghijklmnopqrstuvwxyz-',
+    letters_game: ref('abcçdefghijklmnopqrstuvwxyz'),
+    letters: 'abcçdefghijklmnopqrstuvwxyz',
     answer: ref([]),
     endGame: ref(0),
     errors: ref(0),
@@ -126,15 +126,48 @@ export default {
   },
 
   methods: {
+    async getAPI () {
+      this.$q.loading.show()
+      await api
+        .get(
+          'https://pokeapi.co/api/v2/pokemon/' +
+            Math.floor(Math.random() * 1010)
+        )
+        .then(async response => {
+          this.currentPokemon.name = response.data.name
+          this.currentPokemon.types = response.data.types
+          this.currentPokemon.id = response.data.id
+          this.currentPokemon.image =
+            response.data.sprites.other['official-artwork'].front_default !=
+            null
+              ? response.data.sprites.other['official-artwork'].front_default
+              : '/notfound.png'
+          this.$q.loading.hide()
+          this.answer = Array(this.currentPokemon.name.length).fill('_')
+          ;[...this.currentPokemon.name.toLowerCase()].forEach((value, key) => {
+            if (value === '-') this.answer[key] = value
+          })
+        })
+        .catch(e => {
+          this.$q.notify({
+            type: 'negative',
+            position: 'bottom',
+            message: `Ops, parece que este não existe..` + e
+          })
+          this.$q.loading.hide()
+        })
+    },
+
     getColor (type) {
-      console.log(type.toLowerCase())
-      let bgcolor = this.pokemontypes[type.toLowerCase()].color
-      let color = this.pokemontypes[type.toLowerCase()].textColor
+      let pokemonType = this.pokemontypes[type.toLowerCase()]
+      let bgcolor = pokemonType.color
+      let color = pokemonType.textColor
       return {
         background: bgcolor,
         color: color
       }
     },
+
     verifyLetter (letter) {
       let letter_position = this.currentPokemon.name
         .toLowerCase()
@@ -151,61 +184,18 @@ export default {
       this.letters_game = this.letters_game.replace(letter, '')
     },
 
-    restartGame () {
-      this.answer = []
-      this.errors = 0
-      this.letters_game = this.letters
-      this.endGame = 0
-      this.getAPI()
-    },
-
     verifyWinner () {
       this.currentPokemon.name.toLowerCase() === this.answer.join('')
         ? (this.endGame = 1)
         : ''
     },
 
-    async getAPI () {
-      this.$q.loading.show()
-      await api
-        .get(
-          'https://pokeapi.co/api/v2/pokemon/' +
-            Math.floor(Math.random() * 1010)
-        )
-        .then(async response => {
-          this.currentPokemon.name = response.data.name
-          this.currentPokemon.name = response.data.name
-          this.currentPokemon.types = response.data.types
-          this.currentPokemon.id = response.data.id
-          this.currentPokemon.abilities = response.data.abilities
-          this.currentPokemon.height = response.data.height / 10
-          this.currentPokemon.weight = response.data.weight / 10
-          this.currentPokemon.base_experience = response.data.base_experience
-          this.currentPokemon.image =
-            response.data.sprites.other['official-artwork'].front_default !=
-            null
-              ? response.data.sprites.other['official-artwork'].front_default
-              : '/notfound.png'
-          //Special stats
-          this.currentPokemon.hp = response.data.stats[0].base_stat
-          this.currentPokemon.attack = response.data.stats[1].base_stat
-          this.currentPokemon.defense = response.data.stats[2].base_stat
-          this.currentPokemon.special_attack = response.data.stats[3].base_stat
-          this.currentPokemon.special_defense = response.data.stats[4].base_stat
-          this.currentPokemon.speed = response.data.stats[5].base_stat
-          this.currentPokemon.species_url = response.data.species.url
-          this.$q.loading.hide()
-
-          this.answer = Array(this.currentPokemon.name.length).fill('_')
-        })
-        .catch(e => {
-          this.$q.notify({
-            type: 'negative',
-            position: 'bottom',
-            message: `Ops, parece que este não existe..` + e
-          })
-          this.$q.loading.hide()
-        })
+    restartGame () {
+      this.answer = []
+      this.errors = 0
+      this.letters_game = this.letters
+      this.endGame = 0
+      this.getAPI()
     }
   }
 }
@@ -219,7 +209,7 @@ export default {
 }
 
 .pokemon-img {
-  width: 70%;
+  height: 220px;
 }
 
 .pokemon__game-keyboard {

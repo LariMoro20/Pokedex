@@ -1,6 +1,7 @@
 <template>
-  <div class="col-md-5 col-12 q-mr-sm">
+  <div class="col-md-6 col-12 q-mr-sm">
     <q-input
+      size="sm"
       dense
       flat
       color="white"
@@ -10,7 +11,7 @@
       @keydown.enter.prevent="setCurrentPokemon"
       outlined
       v-model="current_id"
-      placeholder="Pesquisar o pokemon (digite o nome ou id)"
+      placeholder="Digite o nome (em inglês) ou o número na pokedex"
     >
       <template v-slot:after>
         <q-btn
@@ -70,12 +71,6 @@ export default {
   created () {},
 
   methods: {
-    showLoading () {
-      this.$q.loading.show()
-    },
-    hideLoading () {
-      this.$q.loading.hide()
-    },
     setCurrentPokemon () {
       this.currentPokemon_url =
         'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()

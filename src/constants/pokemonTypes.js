@@ -9,14 +9,14 @@ const pokemontypes = {
   poison: { color: '#b377b3', textColor: '#fff', bg: 'fundo_psychic.png' },
   electric: { color: '#efea2b', textColor: '#000', bg: 'fundo_electric.png' },
   rock: { color: '#eb8b0b', textColor: '#fff', bg: '' },
-  psychic: { color: '#794e9e', textColor: '#fff', bg: 'fundo_psychic.png' },
+  psychic: { color: '#7f247f', textColor: '#fff', bg: 'fundo_psychic.png' },
   ice: { color: '#a8d7f2', textColor: '#000', bg: '' },
   bug: { color: '#b5d169', textColor: '#000', bg: '' },
   ghost: { color: '#b380ac', textColor: '#fff', bg: 'fundo_ghost.png' },
   steel: { color: '#97a3a9', textColor: '#fff', bg: '' },
   dragon: { color: '#d7ba07', textColor: '#fff', bg: '' },
   dark: { color: '#184f55', textColor: '#fff', bg: '' },
-  fairy: { color: '#d75684', textColor: '#fff', bg: '' }
+  fairy: { color: '#de1bc0', textColor: '#fff', bg: '' }
 }
 
 export { pokemontypes };
