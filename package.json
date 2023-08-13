@@ -1,7 +1,7 @@
 {
-  "name": "pokédex",
+  "name": "pokedex",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
+  "description": "Pokedex e mini game",
   "productName": "Pokedex",
   "author": "Larissa Moro <54962550+LariMoro20@users.noreply.github.com>",
   "private": true,
