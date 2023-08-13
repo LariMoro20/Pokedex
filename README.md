@@ -63,6 +63,6 @@ quasar serve
 
 ## :clipboard: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Esse projeto está sob a licença restritiva de uso. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 Made with :heart: by [Larissa Santos](https://larissa-santos.vercel.app/)
