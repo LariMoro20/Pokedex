@@ -8,6 +8,9 @@
         <div class="col-md-12 text-center">
           <div class="text-h6 text-white text-bold">Quem é esse pokemon?</div>
         </div>
+        <div class="col-md-12 text-center" v-if="points">
+          <div class="text-white user__points">Seus acertos: {{ points }}</div>
+        </div>
         <div
           class="col-md-3 col-lg-12 col-12 q-px-lg text-center"
           v-if="currentPokemon.image"
@@ -36,16 +39,16 @@
             </div>
           </div>
         </div>
-        <div class="col-12 text-center text-white" v-if="errors < 6">
+        <div class="col-12 text-center text-white" v-if="!lose_game">
           <h4 class="q-pa-none q-ma-none">{{ answer.join(' ') }}</h4>
-          <p class="q-ma-none q-pa-none" v-if="errors < 6 && endGame != 1">
-            Chances: {{ errors }}/6
+          <p class="q-ma-none q-pa-none" v-if="!lose_game && endGame != 1">
+            Chances: {{ errors }}/10
           </p>
         </div>
         <div class="col-md-10 col-12 text-center flex justify-center">
           <div
             class="pokemon__game-keyboard flex"
-            v-if="errors < 6 && endGame != 1"
+            v-if="!lose_game && endGame != 1"
           >
             <q-btn
               color="secondary"
@@ -58,7 +61,7 @@
               {{ letra }}
             </q-btn>
           </div>
-          <div v-else-if="errors >= 6">
+          <div v-else-if="lose_game">
             <div class="text-white q-pt-md">
               <q-separator inset color="white" class="col-md-12" />
               <div class="text-h5 q-pt-md text-bold">GAME OVER</div>
@@ -69,7 +72,7 @@
               <q-btn
                 color="primary"
                 class="q-ma-md"
-                label="Novo jogo"
+                label="Jogar de novo"
                 @click="restartGame()"
               />
             </div>
@@ -82,7 +85,7 @@
               <q-btn
                 color="primary"
                 class="q-ma-md"
-                label="Jogar de novo?"
+                label="Jogar de novo"
                 @click="restartGame()"
               />
             </div>
@@ -111,8 +114,10 @@ export default {
     letters_game: ref('abcçdefghijklmnopqrstuvwxyz'),
     letters: 'abcçdefghijklmnopqrstuvwxyz',
     answer: ref([]),
+    lose_game: ref(false),
     endGame: ref(0),
     errors: ref(0),
+    points: ref(0),
     request_error: false,
     currentPokemon: {
       id: '',
@@ -126,6 +131,9 @@ export default {
 
   async mounted () {
     await this.getAPI()
+    if (!localStorage.getItem('game_points'))
+      localStorage.setItem('game_points', 0)
+    this.points = localStorage.getItem('game_points')
   },
 
   methods: {
@@ -174,26 +182,37 @@ export default {
       let letter_position = this.currentPokemon.name
         .toLowerCase()
         .indexOf(letter.toLowerCase())
-      if (letter_position >= 0 && this.errors < 6) {
+      if (letter_position >= 0 && this.errors < 10) {
         ;[...this.currentPokemon.name.toLowerCase()].forEach((value, key) => {
           if (value === letter) this.answer[key] = value
         })
         this.verifyWinner()
       } else {
-        this.errors < 6 ? this.errors++ : ''
-        if (this.errors >= 6) this.endGame = 1
+        this.errors < 10 ? this.errors++ : ''
+        if (this.errors >= 10) {
+          this.endGame = 1
+          this.lose_game = true
+        }
       }
       this.letters_game = this.letters_game.replace(letter, '')
     },
 
     verifyWinner () {
       this.currentPokemon.name.toLowerCase() === this.answer.join('')
-        ? (this.endGame = 1)
+        ? (this.setPoints(), (this.lose_game = false))
         : ''
+    },
+
+    setPoints () {
+      this.endGame = 1
+      let point = localStorage.getItem('game_points')
+      localStorage.setItem('game_points', parseInt(point) + 1)
+      this.points = localStorage.getItem('game_points')
     },
 
     restartGame () {
       this.answer = []
+      this.lose_game = false
       this.errors = 0
       this.letters_game = this.letters
       this.endGame = 0
@@ -220,7 +239,9 @@ export default {
   max-width: 80%;
   justify-content: center;
 }
-
+.user__points {
+  font-size: 12px;
+}
 .pokemon__game-keyboard-key {
   margin: 5px;
 }
