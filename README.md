@@ -10,7 +10,7 @@ Para visualizar a aplicação: https://pokedex-larisantos.vercel.app/
 
 - Listagem dos pokemons existentes e suas informações;
 - Pesquisa de pokemon;
-- Mini jogo de descobrir o nome o pokemon;
+- Mini jogo de descobrir o pokemon;
 
 ## :books: Tecnologias
 
@@ -24,6 +24,7 @@ Para visualizar a aplicação: https://pokedex-larisantos.vercel.app/
 - Componentização;
 - Roteamento;
 - Consumo de API;
+- Armazenamento em LocalStorage (pontos do mini game);
 - Gerenciamento de Estado (vuex store);
 - Configuração de arquivos de boot do Quasar.
 
