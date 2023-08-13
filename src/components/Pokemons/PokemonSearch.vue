@@ -9,7 +9,7 @@
     @keydown.enter.prevent="setCurrentPokemon"
     outlined
     v-model="current_id"
-    placeholder="Digite o nome (em inglês) ou o número na pokedex"
+    placeholder="Digite o nome (em inglês) ou o número na pokédex"
   >
     <template v-slot:after>
       <q-btn

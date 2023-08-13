@@ -10,13 +10,18 @@ const routes = [{
       import('src/pages/PokemonHomePage.vue')
   },
   { path: 'game', name: 'game', component: () => import('src/pages/PokemonGamePage.vue') },
+  { path: 'about', name: 'about', component: () => import('src/pages/AboutPage.vue') },
 
   ]
 },
 {
   path: '/:catchAll(.*)',
-  component: Error404,
-  name: 'NotFound'
+  component: () => import('layouts/MainLayout.vue'),
+  children: [{
+    path: '',
+    name: 'error',
+    component: () => import('src/pages/errors/404.vue')
+  }]
 }]
 
 export default routes
