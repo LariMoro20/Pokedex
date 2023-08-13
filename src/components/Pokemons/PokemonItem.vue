@@ -63,7 +63,7 @@
 
             <q-card-section
               class="q-pt-none scroll full-height flex items-center justify-center"
-              style="max-height: 76vh"
+              style="max-height: 72vh"
             >
               <div class="itemtrst full-width">
                 <div class="row">
@@ -165,10 +165,10 @@
 
             <q-card-actions
               align="right"
-              class="bg-grey-10 text-white text-center flex justify-center q-pb-lg"
+              class="bg-grey-10 text-white text-center flex justify-center flex-center q-pt-md q-mb-lg"
             >
               <q-btn
-                flat
+                size="md"
                 label="Fechar"
                 class="bg-red-10 col-4"
                 v-close-popup
