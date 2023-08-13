@@ -11,7 +11,7 @@
       </div>
       <h4 class="error_content-text">Ops, essa página não existe..</h4>
       <router-link class="menu-link btn error_content-btn" to="/"
-        >Voltar á pokédex</router-link
+        >Voltar à pokédex</router-link
       >
     </div>
   </div>

@@ -10,6 +10,7 @@ const routes = [{
       import('src/pages/PokemonHomePage.vue')
   },
   { path: 'game', name: 'game', component: () => import('src/pages/PokemonGamePage.vue') },
+  { path: 'about', name: 'about', component: () => import('src/pages/AboutPage.vue') },
 
   ]
 },

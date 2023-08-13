@@ -12,11 +12,13 @@
           v-if="!is_show_search"
         />
         <q-toolbar-title class="flex items-center" v-if="!is_show_search">
-          <img
-            src="/images/logo.png"
-            class="pokemon_logotipo"
-            alt="pokemon logo"
-          />
+          <router-link class="flex items-center" to="/">
+            <img
+              src="/images/logo.png"
+              class="pokemon_logotipo"
+              alt="pokemon logo"
+            />
+          </router-link>
         </q-toolbar-title>
         <q-btn
           icon="search"

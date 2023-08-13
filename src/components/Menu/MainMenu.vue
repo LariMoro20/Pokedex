@@ -3,11 +3,13 @@
     <q-header>
       <q-toolbar class="bg-black text-white">
         <q-toolbar-title class="flex items-center">
-          <img
-            src="/images/logo.png"
-            class="pokemon_logotipo"
-            alt="pokemon logo"
-          />
+          <router-link class="flex items-center" to="/">
+            <img
+              src="/images/logo.png"
+              class="pokemon_logotipo"
+              alt="pokemon logo"
+            />
+          </router-link>
         </q-toolbar-title>
         <q-btn
           icon="search"
