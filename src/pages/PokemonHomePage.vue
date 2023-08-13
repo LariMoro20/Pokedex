@@ -22,9 +22,9 @@
         </div>
       </div>
       <div class="row flex-center column text-center" v-if="has_error">
-        <img class="pokemon__notfound" src="/pokemons/not_found.png" />
+        <img class="pokemon__notfound" src="images/pokemons/not_found.png" />
         <div class="text-white text-h5">
-          Poxa, a pokedex parece estar com problemas no momento. <br />
+          Poxa, a pokédex parece estar com problemas no momento. <br />
           Que tal voltar mais tarde?
         </div>
       </div>
@@ -77,7 +77,7 @@ export default {
     },
     showLoading () {
       this.$q.loading.show({
-        message: 'Carregando pokedex..'
+        message: 'Carregando pokédex..'
       })
     },
     hideLoading () {

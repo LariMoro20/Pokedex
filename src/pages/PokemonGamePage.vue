@@ -93,7 +93,10 @@
         </div>
       </div>
       <div class="row flex-center column text-center" v-if="request_error">
-        <img class="pokemon__notfound" src="/pokemons/not_found.png" />
+        <img
+          class="pokemon__notfound"
+          src="images/pokemons/not_found_pikachu.png"
+        />
         <div class="text-white text-h5">
           Poxa, o game parece estar com problemas no momento. <br />
           Que tal voltar mais tarde?

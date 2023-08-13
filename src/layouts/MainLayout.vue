@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-pull-to-refresh @refresh="refresh">
-      
+      <Header />
       <q-page-container>
         <router-view />
         <Footer />
@@ -12,11 +12,14 @@
 
 <script>
 //import MainMenu from "src/components/Menu/MainMenu.vue";
-import Footer from "src/components/Parts/Footer.vue";
+
+import Footer from 'src/components/Parts/Footer.vue'
+import Header from 'src/components/Parts/Header.vue'
+
 export default {
-  name: "MainLayout",
+  name: 'MainLayout',
   components: {
-   // MainMenu,
+    Header,
     Footer
   },
   data: () => ({
@@ -24,18 +27,17 @@ export default {
     leftDrawerOpen: false
   }),
   methods: {
-    refresh(done) {
+    refresh (done) {
       setTimeout(() => {
-        console.log("Refresh..");
-        done();
-      }, 1000);
+        console.log('Refresh..')
+        done()
+      }, 1000)
     }
   }
-};
+}
 </script>
 <style>
 * {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
-
 </style>
