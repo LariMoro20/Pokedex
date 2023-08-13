@@ -230,7 +230,30 @@ export default {
       id: '',
       type: ''
     },
+<<<<<<< HEAD:src/components/pokemons/Item.vue
+    pokemontypes: {
+      normal: { color: '#98c84c', bg: 'fundo-poke.jpg' },
+      fire: { color: '#f1523c', bg: 'bg_fire.png' },
+      water: { color: '#2eb0e5', bg: 'bg_water.png' },
+      grass: { color: '#99c74c', bg: 'bg_grass.png' },
+      ground: { color: '#eb8b0b', bg: 'fundo-poke.jpg' },
+      flying: { color: '#fff', bg: 'bg_fly.png' },
+      fighting: { color: '#fff', bg: 'fundo_fighting.png' },
+      poison: { color: '#b377b3', bg: 'fundo_psychic.png' },
+      electric: { color: '#efea2b', bg: 'fundo_electric.png' },
+      rock: { color: '#eb8b0b', bg: '' },
+      psychic: { color: '#794e9e', bg: 'fundo_psychic.png' },
+      ice: { color: '#a8d7f2', bg: '' },
+      bug: { color: '#b5d169', bg: '' },
+      ghost: { color: '#b380ac', bg: 'fundo_ghost.png' },
+      steel: { color: '#97a3a9', bg: '' },
+      dragon: { color: '#d7ba07', bg: '' },
+      dark: { color: '#184f55', bg: '' },
+      fairy: { color: '#d75684', bg: '' }
+    }
+=======
     pokemontypes
+>>>>>>> feature/poke-game:src/components/Pokemons/PokemonItem.vue
   }),
   created () {
     this.getPokeByURL()
