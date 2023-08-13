@@ -192,7 +192,7 @@
 
 <script>
 import api from '../../services/api'
-import LoadItem from 'src/components/Pokemons/LoadItem.vue'
+import LoadItem from 'src/components/Pokemons/PokemonLoad.vue'
 import { pokemontypes } from 'src/constants/pokemonTypes'
 
 export default {
