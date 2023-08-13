@@ -1,7 +1,10 @@
 <template>
-  <q-page class="poke__page">
-    <div class="container q-pa-md">
-      <div class="row flex-center">
+  <q-page class="poke__page flex flex-center">
+    <div class="container q-pa-lg">
+      <div
+        class="row flex-center"
+        v-if="!request_error && currentPokemon.image"
+      >
         <div class="col-md-12 text-center">
           <div class="text-h6 text-white text-bold">Quem é esse pokemon?</div>
         </div>
@@ -86,15 +89,14 @@
           </div>
         </div>
       </div>
+      <div class="row flex-center column text-center" v-if="request_error">
+        <img class="pokemon__notfound" src="/pokemons/not_found.png" />
+        <div class="text-white text-h5">
+          Poxa, o game parece estar com problemas no momento. <br />
+          Que tal voltar mais tarde?
+        </div>
+      </div>
     </div>
-    <q-page-scroller
-      position="bottom-right"
-      :scroll-offset="150"
-      :offset="[18, 18]"
-      :duration="800"
-    >
-      <q-btn fab icon="keyboard_arrow_up" color="primary" />
-    </q-page-scroller>
   </q-page>
 </template>
 
@@ -111,6 +113,7 @@ export default {
     answer: ref([]),
     endGame: ref(0),
     errors: ref(0),
+    request_error: false,
     currentPokemon: {
       id: '',
       name: '',
@@ -127,7 +130,9 @@ export default {
 
   methods: {
     async getAPI () {
-      this.$q.loading.show()
+      this.$q.loading.show({
+        message: 'Carregando o game..'
+      })
       await api
         .get(
           'https://pokeapi.co/api/v2/pokemon/' +
@@ -147,14 +152,11 @@ export default {
           ;[...this.currentPokemon.name.toLowerCase()].forEach((value, key) => {
             if (value === '-') this.answer[key] = value
           })
+          this.request_error = false
         })
         .catch(e => {
-          this.$q.notify({
-            type: 'negative',
-            position: 'bottom',
-            message: `Ops, parece que este não existe..` + e
-          })
           this.$q.loading.hide()
+          this.request_error = true
         })
     },
 
@@ -207,7 +209,9 @@ export default {
   background-repeat: repeat;
   background-attachment: fixed;
 }
-
+.pokemon__notfound {
+  width: 50%;
+}
 .pokemon-img {
   height: 220px;
 }

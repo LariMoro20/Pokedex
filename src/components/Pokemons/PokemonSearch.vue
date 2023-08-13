@@ -1,37 +1,34 @@
 <template>
-  <div class="col-md-6 col-12 q-mr-sm">
-    <q-input
-      size="sm"
-      dense
-      flat
-      color="white"
-      label-color="black"
-      class="q-pa-none"
-      bg-color="white"
-      @keydown.enter.prevent="setCurrentPokemon"
-      outlined
-      v-model="current_id"
-      placeholder="Digite o nome (em inglês) ou o número na pokedex"
-    >
-      <template v-slot:after>
-        <q-btn
-          icon="search"
-          color="grey-9"
-          :disable="current_id"
-          @click="setCurrentPokemon"
-        >
-          <q-tooltip anchor="bottom middle" self="center middle">
-            Pesquisar
-          </q-tooltip>
-        </q-btn>
-        <q-btn icon="close" color="grey-9" @click="cancelSearch">
-          <q-tooltip anchor="bottom middle" self="center middle">
-            Cancelar
-          </q-tooltip>
-        </q-btn>
-      </template>
-    </q-input>
-  </div>
+  <q-input
+    dense
+    flat
+    color="white"
+    label-color="black"
+    class="q-pa-none"
+    bg-color="white"
+    @keydown.enter.prevent="setCurrentPokemon"
+    outlined
+    v-model="current_id"
+    placeholder="Digite o nome (em inglês) ou o número na pokedex"
+  >
+    <template v-slot:after>
+      <q-btn
+        icon="search"
+        color="grey-9"
+        :disable="current_id === ''"
+        @click="setCurrentPokemon"
+      >
+        <q-tooltip anchor="bottom middle" self="center middle">
+          Pesquisar
+        </q-tooltip>
+      </q-btn>
+      <q-btn icon="close" color="grey-9" @click="cancelSearch">
+        <q-tooltip anchor="bottom middle" self="center middle">
+          Cancelar
+        </q-tooltip>
+      </q-btn>
+    </template>
+  </q-input>
 
   <q-dialog
     class="text-white no-scroll q-pa-none no-scroll"
@@ -53,7 +50,7 @@
 </template>
 
 <script>
-import Item from 'src/components/pokemons/Item.vue'
+import Item from 'src/components/Pokemons/Item.vue'
 
 export default {
   name: 'PokemonSearch',
@@ -72,9 +69,11 @@ export default {
 
   methods: {
     setCurrentPokemon () {
-      this.currentPokemon_url =
-        'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()
-      if (this.currentPokemon_url) this.openModal = true
+      if (this.current_id != '') {
+        this.currentPokemon_url =
+          'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()
+        if (this.currentPokemon_url) this.openModal = true
+      }
     },
     cancelSearch () {
       this.$emit('closeSearch', this.editor)

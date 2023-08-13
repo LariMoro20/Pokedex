@@ -2,10 +2,10 @@ import Error404 from '../pages/errors/404.vue'
 
 const routes = [{
   path: '/',
-  component: () =>
-    import('layouts/MainLayout.vue'),
+  component: () => import('layouts/MainLayout.vue'),
   children: [{
-    path: 'home',
+    path: '',
+    name: 'home',
     component: () =>
       import('src/pages/PokemonHomePage.vue')
   },
