@@ -134,9 +134,9 @@ export default {
 
   async mounted () {
     await this.getAPI()
-    if (!localStorage.getItem('game_points'))
-      localStorage.setItem('game_points', 0)
-    this.points = localStorage.getItem('game_points')
+    if (!localStorage.getItem('pokedex_game_points'))
+      localStorage.setItem('pokedex_game_points', 0)
+    this.points = localStorage.getItem('pokedex_game_points')
   },
 
   methods: {
@@ -208,9 +208,9 @@ export default {
 
     setPoints () {
       this.endGame = 1
-      let point = localStorage.getItem('game_points')
-      localStorage.setItem('game_points', parseInt(point) + 1)
-      this.points = localStorage.getItem('game_points')
+      let point = localStorage.getItem('pokedex_game_points')
+      localStorage.setItem('pokedex_game_points', parseInt(point) + 1)
+      this.points = localStorage.getItem('pokedex_game_points')
     },
 
     restartGame () {
