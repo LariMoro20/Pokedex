@@ -10,6 +10,7 @@ Para visualizar o layout: https://pokedex-larisantos.vercel.app/
 
 - Vue 3 -> https://vuejs.org/
 - Quasar framework -> https://quasar.dev/
+- PokeAPI -> https://pokeapi.co/
 
 ### Contém
 
@@ -44,6 +45,14 @@ quasar serve
 ## :star: Artes e conteúdos
 
 - Logotipo: https://logodownload.org/pokemon-logo/
+- Pokemons e conteúdos: https://pokeapi.co/
+- Imagem Área vulcânica [aminoapps](https://aminoapps.com/c/pokemon-amino-ptbr/page/blog/as-areas-vulcanicas-do-mundo-pokemon/aaYm_7qU0uakLX1zDwgDpVjJGMERnqRpkm)
+- Imagem Floresta Anime [Pinterest](https://br.pinterest.com/pin/807762883155535826/)
+- Imagem Praia [Designed by ddraw / Freepik](http://www.freepik.com)
+- Imagem Paisagem Anime [GabrielSimoes / Deviantart](https://www.deviantart.com/gabrielsimoes/art/Estudo-Paisagem-Anime-Anime-Landscape-Study-923587445)
+- Imagem Fundo psiquico [mob.org](https://wallpaper.mob.org/pc/gallery/tag=purple/3/)
+- Imagem Anime noite [Pinterest](https://br.pinterest.com/pin/442337994658280586/sent/?invite_code=d9736760b33b4ced988c263f04169d5e&sender=630011572781170960&sfo=1)
+- Imagem raios [Designed by ioat / Freepik](https://www.freepik.com/premium-vector/thunderbolt-background_10559644.htm)
 
 ## :clipboard: Licença
 
