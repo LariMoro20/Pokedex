@@ -1,10 +1,16 @@
 # Pokedex
 
-Aplicação SPA desenvolvida em Vue.js utilizando Quasar framework.
+Aplicação de pokedex desenvolvida em Vue.js utilizando Quasar framework e dados rovidos de api externa.
 
 Para visualizar o layout: https://pokedex-larisantos.vercel.app/
 
 ![imagem](https://github.com/LariMoro20/Pokedex/blob/main/pokemon.png)
+
+### Conteúdo
+
+- Listagem dos pokemons existentes e suas informações;
+- Pesquisa de pokemon;
+- Mini jogo de descobrir o nome o pokemon;
 
 ## :books: Tecnologias
 
@@ -12,11 +18,10 @@ Para visualizar o layout: https://pokedex-larisantos.vercel.app/
 - Quasar framework -> https://quasar.dev/
 - PokeAPI -> https://pokeapi.co/
 
-### Contém
+### Conceitos de desenvolvimento
 
 - Reatividade;
 - Componentização;
-- LocalStorage;
 - Roteamento;
 - Consumo de API;
 - Gerenciamento de Estado (vuex store);
@@ -53,6 +58,7 @@ quasar serve
 - Imagem Fundo psiquico [mob.org](https://wallpaper.mob.org/pc/gallery/tag=purple/3/)
 - Imagem Anime noite [Pinterest](https://br.pinterest.com/pin/442337994658280586/sent/?invite_code=d9736760b33b4ced988c263f04169d5e&sender=630011572781170960&sfo=1)
 - Imagem raios [Designed by ioat / Freepik](https://www.freepik.com/premium-vector/thunderbolt-background_10559644.htm)
+- Imagem arena [wallpapers.com](https://es.wallpapers.com/fondos-de-pantalla/unetea-millones-de-entrenadores-y-lucha-por-la-gloria-en-el-estadio-pokemon-2mzh30c645wfi9w2.html)
 
 ## :clipboard: Licença
 
