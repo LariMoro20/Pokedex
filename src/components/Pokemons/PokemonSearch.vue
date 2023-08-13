@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import Item from './Item.vue'
+import Item from 'src/components/Pokemons/PokemonItem.vue'
 
 export default {
   name: 'PokemonSearch',

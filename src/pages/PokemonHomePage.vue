@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import Item from 'src/components/Pokemons/Item.vue'
+import Item from 'src/components/Pokemons/PokemonItem.vue'
 
 import api from '../services/api'
 export default {
