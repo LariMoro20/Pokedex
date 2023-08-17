@@ -11,20 +11,8 @@
             />
           </router-link>
         </q-toolbar-title>
-        <q-btn
-          icon="search"
-          v-if="!is_show_search"
-          @click="showSearch"
-          class="q-mr-xs"
-          color="grey-9"
-        >
-          <q-tooltip anchor="bottom middle" self="center middle">
-            Pesquisar Pokemon
-          </q-tooltip>
-        </q-btn>
-        <div class="col-md-5 col-12 q-mr-sm" v-if="is_show_search">
-          <PokemonSearch @closeSearch="showSearch" />
-        </div>
+
+        <PokemonSearch />
         <q-btn
           icon="home"
           class="q-mr-xs"
@@ -40,22 +28,11 @@
 </template>
 <script>
 import PokemonSearch from 'src/components/Pokemons/PokemonSearch.vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
   components: { PokemonSearch },
   name: 'MainMenu',
-  setup () {
-    const is_show_search = ref(false)
-
-    const showSearch = () => {
-      is_show_search.value = !is_show_search.value
-    }
-
-    return {
-      is_show_search,
-      showSearch
-    }
-  }
+  setup () {}
 })
 </script>
 

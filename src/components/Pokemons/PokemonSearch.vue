@@ -1,37 +1,53 @@
 <template>
-  <q-input
-    dense
-    flat
-    color="white"
-    label-color="black"
-    class="q-pa-none"
-    bg-color="white"
-    @keydown.enter.prevent="setCurrentPokemon"
-    outlined
-    v-model="current_id"
-    placeholder="Digite o nome (em inglês) ou o número na pokédex"
+  <q-btn
+    data-cy="pokemon_search_open"
+    icon="search"
+    v-if="!is_show_search"
+    @click="showSearch"
+    class="q-mr-xs"
+    color="grey-9"
   >
-    <template v-slot:after>
-      <q-btn
-        icon="search"
-        color="grey-9"
-        :disable="current_id === ''"
-        @click="setCurrentPokemon"
-      >
-        <q-tooltip anchor="bottom middle" self="center middle">
-          Pesquisar
-        </q-tooltip>
-      </q-btn>
-      <q-btn icon="close" color="grey-9" @click="cancelSearch">
-        <q-tooltip anchor="bottom middle" self="center middle">
-          Cancelar
-        </q-tooltip>
-      </q-btn>
-    </template>
-  </q-input>
-
+    <q-tooltip anchor="bottom middle" self="center middle">
+      Pesquisar Pokemon
+    </q-tooltip>
+  </q-btn>
+  <div class="col-md-5 col-12 q-mr-sm" v-if="is_show_search">
+    <q-input
+      dense
+      flat
+      color="white"
+      label-color="black"
+      data-cy="pokemon_search_input"
+      class="q-pa-none"
+      bg-color="white"
+      @keydown.enter.prevent="setCurrentPokemon"
+      outlined
+      v-model="current_id"
+      placeholder="Digite o nome (em inglês) ou o número na pokédex"
+    >
+      <template v-slot:after>
+        <q-btn
+          icon="search"
+          data-cy="pokemon_search_button"
+          color="grey-9"
+          :disable="current_id === ''"
+          @click="setCurrentPokemon"
+        >
+          <q-tooltip anchor="bottom middle" self="center middle">
+            Pesquisar
+          </q-tooltip>
+        </q-btn>
+        <q-btn icon="close" color="grey-9" @click="cancelSearch">
+          <q-tooltip anchor="bottom middle" self="center middle">
+            Cancelar
+          </q-tooltip>
+        </q-btn>
+      </template>
+    </q-input>
+  </div>
   <q-dialog
     class="text-white no-scroll q-pa-none no-scroll"
+    data-cy="pokemon_search_modal"
     v-model="openModal"
   >
     <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
@@ -51,6 +67,7 @@
 
 <script>
 import Item from 'src/components/Pokemons/PokemonItem.vue'
+import { defineComponent, ref, computed } from 'vue'
 
 export default {
   name: 'PokemonSearch',
@@ -58,6 +75,7 @@ export default {
   emits: ['closeSearch'],
   data: () => ({
     currentPokemon_url: '',
+    is_show_search: ref(false),
     current_id: '',
     openModal: false,
     pokemons: [],
@@ -75,8 +93,11 @@ export default {
         if (this.currentPokemon_url) this.openModal = true
       }
     },
+    showSearch () {
+      this.is_show_search = !this.is_show_search
+    },
     cancelSearch () {
-      this.$emit('closeSearch', this.editor)
+      this.showSearch()
     }
   }
 }

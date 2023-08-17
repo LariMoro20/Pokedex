@@ -57,6 +57,7 @@
               v-for="(letra, key) in letters_game"
               :key="key"
               size="sm"
+              data-cy="letter-button"
             >
               {{ letra }}
             </q-btn>
@@ -197,6 +198,7 @@ export default {
           this.lose_game = true
         }
       }
+      // Comentar para testes
       this.letters_game = this.letters_game.replace(letter, '')
     },
 
