@@ -6,6 +6,7 @@
           class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke"
           v-for="(pokemon, ikey) in pokemons"
           :key="ikey"
+          data-cy="pokemons_list"
         >
           <Item :url="pokemon.url" />
         </div>

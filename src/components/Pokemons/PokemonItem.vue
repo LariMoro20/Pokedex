@@ -47,12 +47,18 @@
 
       <q-card-section class="text-center">
         <div class="col-md-12 items-center justify-center flex">
-          <q-btn label="Detalhes" color="primary" @click="handleOpenDialog" />
+          <q-btn
+            label="Detalhes"
+            data-cy="pokemon_details"
+            color="primary"
+            @click="handleOpenDialog"
+          />
         </div>
 
         <q-dialog
           class="text-white no-scroll q-pa-none no-scroll"
           v-model="openDialog"
+          data-cy="pokemon_details_modal"
         >
           <q-card class="bg-grey-10 no-scroll text-white full-height">
             <q-card-section class="text-center q-pa-sm">

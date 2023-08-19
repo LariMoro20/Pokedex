@@ -41,28 +41,43 @@
         </div>
         <div class="col-12 text-center text-white" v-if="!lose_game">
           <h4 class="q-pa-none q-ma-none">{{ answer.join(' ') }}</h4>
-          <p class="q-ma-none q-pa-none" v-if="!lose_game && endGame != 1">
+          <p
+            :class="[
+              'q-ma-sm bg-white points',
+              errors < 5
+                ? 'text-black'
+                : errors <= 7
+                ? 'text-yellow-9 text-bold'
+                : 'text-red-9 text-bold'
+            ]"
+            v-if="!lose_game && endGame != 1"
+          >
             Chances: {{ errors }}/10
           </p>
         </div>
-        <div class="col-md-10 col-12 text-center flex justify-center">
+        <div class="col-md-9 col-12 text-center flex justify-center">
           <div
             class="pokemon__game-keyboard flex"
             v-if="!lose_game && endGame != 1"
           >
             <q-btn
-              color="secondary"
               @click="verifyLetter(letra)"
-              class="pokemon__game-keyboard-key text-black"
-              v-for="(letra, key) in letters_game"
+              :class="[
+                'pokemon__game-keyboard-key',
+                game_letters.includes(letra)
+                  ? 'text-black bg-secondary'
+                  : 'text-white bg-black'
+              ]"
+              v-for="(letra, key) in all_letters"
               :key="key"
-              size="sm"
+              :disable="!game_letters.includes(letra)"
+              size="md"
               data-cy="letter-button"
             >
               {{ letra }}
             </q-btn>
           </div>
-          <div v-else-if="lose_game">
+          <div v-else-if="lose_game" data-cy="gameover_message">
             <div class="text-white q-pt-md">
               <q-separator inset color="white" class="col-md-12" />
               <div class="text-h5 q-pt-md text-bold">GAME OVER</div>
@@ -78,7 +93,7 @@
               />
             </div>
           </div>
-          <div v-else>
+          <div v-else data-cy="sucess_message">
             <div class="text-white q-pt-md">
               <q-separator inset color="white" class="col-md-12" />
               <div class="text-h5 q-pt-md text-bold">PARABÉNS <br /></div>
@@ -115,8 +130,8 @@ import { pokemontypes } from 'src/constants/pokemonTypes'
 export default {
   name: 'PokemonPage',
   data: () => ({
-    letters_game: ref('abcçdefghijklmnopqrstuvwxyz'),
-    letters: 'abcçdefghijklmnopqrstuvwxyz',
+    all_letters: 'abcçdefghijklmnopqrstuvwxyz',
+    game_letters: ref('abcçdefghijklmnopqrstuvwxyz'),
     answer: ref([]),
     lose_game: ref(false),
     endGame: ref(0),
@@ -199,7 +214,7 @@ export default {
         }
       }
       // Comentar para testes
-      this.letters_game = this.letters_game.replace(letter, '')
+      this.game_letters = this.game_letters.replace(letter, '')
     },
 
     verifyWinner () {
@@ -219,7 +234,7 @@ export default {
       this.answer = []
       this.lose_game = false
       this.errors = 0
-      this.letters_game = this.letters
+      this.game_letters = this.all_letters
       this.endGame = 0
       this.getAPI()
     }
@@ -239,10 +254,12 @@ export default {
 .pokemon-img {
   height: 220px;
 }
-
 .pokemon__game-keyboard {
   max-width: 80%;
   justify-content: center;
+}
+.points {
+  font-size: 0.8em;
 }
 .user__points {
   font-size: 12px;
