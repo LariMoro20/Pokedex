@@ -431,9 +431,9 @@ export default {
 }
 
 .pokemon__modal__skills {
-  border-top: 2px solid #4713d6;
+  border-top: 2px solid #194587;
   margin-bottom: 5px;
-  border-bottom: 2px solid #4713d6;
+  border-bottom: 2px solid #194587;
 }
 .pokemon__modal__skills-item {
   padding: 7px;
