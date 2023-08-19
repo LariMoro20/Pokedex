@@ -17,6 +17,7 @@ Para visualizar a aplicação: https://pokedex-larisantos.vercel.app/
 - Vue 3 -> https://vuejs.org/
 - Quasar framework -> https://quasar.dev/
 - PokeAPI -> https://pokeapi.co/
+- Cypress -> https://www.cypress.io/
 
 ### Conceitos de desenvolvimento
 
@@ -25,8 +26,7 @@ Para visualizar a aplicação: https://pokedex-larisantos.vercel.app/
 - Roteamento;
 - Consumo de API;
 - Armazenamento em LocalStorage (pontos do mini game);
-- Gerenciamento de Estado (vuex store);
-- Configuração de arquivos de boot do Quasar.
+- Testes de software com cypress
 
 ## :hammer: Instalação
 
@@ -46,6 +46,26 @@ quasar dev
 quasar build
 cd dist/spa
 quasar serve
+```
+
+### Teste da aplicação
+
+Para executar os testes é necessário executar a aplicação em ambiente de desenvolvimento:
+
+```bash
+quasar dev
+```
+
+Executar testes no terminal:
+
+```bash
+cypress:run
+```
+
+Abrir interface do Cypress:
+
+```bash
+cypress:run
 ```
 
 ## :star: Artes e conteúdos
