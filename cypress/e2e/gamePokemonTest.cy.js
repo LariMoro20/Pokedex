@@ -1,4 +1,4 @@
-describe('Teste de jogo da forca', () => {
+describe('Teste do jogo Descubra o Pokemon', () => {
   let pokemonName = '';
   beforeEach('', () => {
     cy.visit('/game');
