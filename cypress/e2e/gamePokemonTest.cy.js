@@ -30,7 +30,7 @@ describe('Teste de jogo da forca', () => {
         let letterPosition = pokemonName
           .toLowerCase()
           .indexOf(buttonText.toLowerCase());
-        if (letterPosition <= 0 && errors < 10) {
+        if (letterPosition < 0 && errors < 10) {
           errors++;
           cy.wrap(button).click();
         }
