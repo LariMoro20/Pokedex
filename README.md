@@ -6,20 +6,20 @@ Para visualizar a aplicação: https://pokedex-larisantos.vercel.app/
 
 ![imagem](https://github.com/LariMoro20/Pokedex/blob/main/pokemon.png)
 
-### Conteúdo
+## :book: Conteúdo
 
 - Listagem dos pokemons existentes e suas informações;
 - Pesquisa de pokemon;
 - Mini jogo de descobrir o pokemon;
 
-## :books: Tecnologias
+## :electric_plug: Tecnologias
 
 - Vue 3 -> https://vuejs.org/
 - Quasar framework -> https://quasar.dev/
 - PokeAPI -> https://pokeapi.co/
 - Cypress -> https://www.cypress.io/
 
-### Conceitos de desenvolvimento
+### :computer: Conceitos de desenvolvimento
 
 - Reatividade;
 - Componentização;
@@ -28,19 +28,18 @@ Para visualizar a aplicação: https://pokedex-larisantos.vercel.app/
 - Armazenamento em LocalStorage (pontos do mini game);
 - Testes de software com cypress
 
-## :hammer: Instalação
+## :gear: Instalação
 
 ```bash
 npm install
 ```
 
-### Rodar a aplicação ambiente DEV:
-
+## :clapper: Rodar a aplicação 
+Ambiente DEV:
 ```bash
 quasar dev
 ```
-
-### Build da aplicação em SPA
+Build da aplicação em SPA
 
 ```bash
 quasar build
@@ -48,24 +47,23 @@ cd dist/spa
 quasar serve
 ```
 
-### Teste da aplicação
+## :test_tube: Teste da aplicação
 
-Para executar os testes é necessário executar a aplicação em ambiente de desenvolvimento:
+Para executar os testes é necessário primeiro executar a aplicação em ambiente de desenvolvimento:
 
 ```bash
 quasar dev
 ```
 
-Executar testes no terminal:
+Depois, para executar os testes no terminal:
 
 ```bash
 cypress:run
 ```
 
-Abrir interface do Cypress:
-
+Ou abrir na interface do Cypress:
 ```bash
-cypress:run
+cypress:open
 ```
 
 ## :star: Artes e conteúdos
