@@ -145,13 +145,15 @@
                       >
                         <div class="row">
                           <div class="col-12">Grupo de ovos</div>
-                          <span
-                            class="pokemon__types-item text-capitalize col-6"
+                          <div
+                            class="col-6 q-mb-sm"
                             v-for="(egg, ikey) in currentPokemon.egg_groups"
                             :key="ikey"
                           >
-                            {{ egg.name }}
-                          </span>
+                            <span class="pokemon__types-item text-capitalize">
+                              {{ egg.name }}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
