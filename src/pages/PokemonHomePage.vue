@@ -124,10 +124,4 @@ export default {
 .pokemon__notfound {
   width: 50%;
 }
-.poke__page {
-  background-color: #000 !important;
-  background-image: url('/images/bg.jpg');
-  background-repeat: repeat;
-  background-attachment: fixed;
-}
 </style>

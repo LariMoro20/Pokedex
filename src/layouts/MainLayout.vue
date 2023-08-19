@@ -40,4 +40,10 @@ export default {
 * {
   font-family: 'Inter', sans-serif;
 }
+.poke__page {
+  background-color: #163c77;
+  /* background-image: url('/images/bg.jpg');*/
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
 </style>

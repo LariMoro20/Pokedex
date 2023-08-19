@@ -242,12 +242,6 @@ export default {
 }
 </script>
 <style scoped>
-.poke__page {
-  background-color: #000 !important;
-  background-image: url('/images/bg.jpg');
-  background-repeat: repeat;
-  background-attachment: fixed;
-}
 .pokemon__notfound {
   width: 50%;
 }
