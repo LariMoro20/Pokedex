@@ -1,26 +1,37 @@
 <template>
   <q-card
-    class="my-card q-pa-sm q-my-md"
+    class="poke-card q-pa-sm q-my-md"
     v-if="currentPokemon.types && currentPokemon.image"
   >
-    <div class="poke-card" :style="'background-color:' + getColor.background">
+    <div class="" :style="'background-color:' + getTypes.background">
       <div
         class="col-md-12 pokemon__card-number flex justify-between items-center"
       >
-        <div
-          class="text-h6 text-capitalize q-pa-xs pokemon__card-pokename"
-          :style="'color:' + getColor.color"
+        <h6
+          class="text-capitalize q-pa-xs pokemon__card-pokename"
+          :style="'color:' + getTypes.color"
         >
           {{ currentPokemon.name }}
+        </h6>
+        <div class="flex items-center">
+          <span
+            class="pokemon__card-status q-mr-xs text-bold"
+            :style="'color:' + getTypes.color"
+          >
+            <small class="pokemon__card-hp"> PS:</small> {{ currentPokemon.hp }}
+          </span>
+          <span
+            class="pokemon__card-energy flex items-center"
+            :style="'color:' + getTypes.color"
+          >
+            <img :src="getTypes.energy" />
+          </span>
         </div>
-        <small class="pokemon__card-HP" :style="'color:' + getColor.color">
-          HP: {{ currentPokemon.hp }}</small
-        >
       </div>
       <div
         class="text-center pokemon__card-image q-px-lg flex items-center justify-center"
         :style="
-          'background: url(' + getColor.background_img + ') 50% no-repeat;'
+          'background: url(' + getTypes.background_img + ') 50% no-repeat;'
         "
       >
         <div>
@@ -29,16 +40,16 @@
       </div>
       <div
         class="pokemon__pokedex flex items-center justify-center"
-        :style="'color:' + getColor.color"
+        :style="'color:' + getTypes.color"
       >
         Número na pokedex: {{ currentPokemon.id }}
       </div>
       <div class="pokemon__skills items-center justify-center">
-        <div class="pokemon__skills-item" :style="'color:' + getColor.color">
+        <div class="pokemon__skills-item" :style="'color:' + getTypes.color">
           <b> Ataque:</b> {{ currentPokemon.attack }}<br />
           <b> Defesa:</b> {{ currentPokemon.defense }}
         </div>
-        <div class="pokemon__skills-item" :style="'color:' + getColor.color">
+        <div class="pokemon__skills-item" :style="'color:' + getTypes.color">
           <b> Ataque V:</b> {{ currentPokemon.special_attack }}<br />
           <b> Defesa V:</b>
           {{ currentPokemon.special_defense }}
@@ -93,42 +104,55 @@
                     >
                       <div>
                         <span
-                          class="pokemon__types-item pokemon__types-item-type bg-primary text-white text-capitalize"
+                          class="pokemon__modal-energy q-pr-sm"
                           v-for="(type, ikey) in currentPokemon.types"
                           :key="ikey"
                         >
-                          {{ type.type.name }}
+                          <img :src="getTypesForModal(type.type.name).energy" />
+                          <q-tooltip
+                            anchor="bottom middle"
+                            self="center middle"
+                            class="text-capitalize"
+                          >
+                            {{ type.type.name }}
+                          </q-tooltip>
                         </span>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-12 full-width">
                     <div
-                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-around"
+                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white justify-around"
                     >
                       <div
                         class="col-6 text-center pokemon__modal__skills-item text-capitalize"
                       >
-                        Habilidade:<br />
-                        <span
-                          class="pokemon__types-item text-capitalize"
-                          v-for="(hability, ikey) in currentPokemon.abilities"
-                          :key="ikey"
-                        >
-                          {{ hability.ability.name }}
-                        </span>
+                        <div class="row">
+                          <div class="col-12">Habilidades</div>
+                          <div
+                            class="col-6 q-mb-sm"
+                            v-for="(hability, ikey) in currentPokemon.abilities"
+                            :key="ikey"
+                          >
+                            <span class="pokemon__types-item text-capitalize">
+                              {{ hability.ability.name }}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                       <div
                         class="col-6 text-center pokemon__modal__skills-item text-capitalize"
                       >
-                        Grupo de ovos:<br />
-                        <span
-                          class="pokemon__types-item text-capitalize"
-                          v-for="(egg, ikey) in currentPokemon.egg_groups"
-                          :key="ikey"
-                        >
-                          {{ egg.name }}
-                        </span>
+                        <div class="row">
+                          <div class="col-12">Grupo de ovos</div>
+                          <span
+                            class="pokemon__types-item text-capitalize col-6"
+                            v-for="(egg, ikey) in currentPokemon.egg_groups"
+                            :key="ikey"
+                          >
+                            {{ egg.name }}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
@@ -141,27 +165,9 @@
                       <div class="pokemon__modal__skills-item">
                         Peso: {{ currentPokemon.weight }} kg
                       </div>
-                      <div class="pokemon__modal__skills-item">
-                        Forma: {{ currentPokemon.shape.name }}
-                      </div>
+
                       <div class="pokemon__modal__skills-item">
                         Velocidade: {{ currentPokemon.speed }}
-                      </div>
-                    </div>
-                    <div
-                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-between"
-                    >
-                      <div class="pokemon__modal__skills-item">
-                        Ataque: {{ currentPokemon.attack }}
-                      </div>
-                      <div class="pokemon__modal__skills-item">
-                        Defesa: {{ currentPokemon.defense }}
-                      </div>
-                      <div class="pokemon__modal__skills-item">
-                        Ataque esp.: {{ currentPokemon.special_attack }}
-                      </div>
-                      <div class="pokemon__modal__skills-item">
-                        Defesa esp.: {{ currentPokemon.special_defense }}
                       </div>
                     </div>
                   </div>
@@ -210,7 +216,7 @@ export default {
   },
   components: { LoadItem },
   computed: {
-    getColor () {
+    getTypes () {
       let pokemonType =
         this.pokemontypes[this.currentPokemon.types[0].type.name]
       let bgcolor = pokemonType.color
@@ -218,10 +224,12 @@ export default {
       let background_img = pokemonType.bg
         ? pokemonType.bg
         : 'images/backgrounds_pokemons/fundo-poke.jpg'
+      let energy = pokemonType.energy
       return {
         background: bgcolor,
         color: color,
-        background_img: background_img
+        background_img: background_img,
+        energy: energy
       }
     }
   },
@@ -247,6 +255,15 @@ export default {
     }
   },
   methods: {
+    getTypesForModal (type) {
+      let type_default = 'normal'
+      let pokemonType = 'normal'
+      if (typeof type === 'string') pokemonType = this.pokemontypes[type]
+      else pokemonType = this.pokemontypes[type_default]
+
+      return pokemonType
+    },
+
     async handleOpenDialog () {
       this.$q.loading.show()
       this.currentPokemon.species_url
@@ -305,17 +322,17 @@ export default {
 </script>
 
 <style scoped>
-.my-card {
+.poke-card {
   background-color: #e2e2e2;
 }
-.poke-card {
+.poke__card-content {
   background-color: #fff;
   min-height: 350px;
 }
 .pokemon__card-image-img {
   height: 143px;
   max-width: 100%;
-  margin-top: 15px;
+  margin-top: 7px;
   transform: scale(1);
 }
 .pokemon__card-image-img:hover {
@@ -331,14 +348,66 @@ export default {
   color: black;
   line-height: normal;
   font-size: 1.3em;
-  border-right: 6px groove;
   padding-right: 71px;
   padding-bottom: 0px;
   padding-top: 7px;
 }
+
 .pokemon__card-pokename {
   padding: 0;
+  margin: 0;
+  font-size: 1.2em;
 }
+.pokemon__card-number {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+}
+.pokemon__card-hp {
+  font-size: 10px;
+}
+.pokemon__card-energy img {
+  width: 16px;
+  border-radius: 100px;
+}
+.pokemon__pokedex {
+  font-size: 10px;
+}
+
+.pokemon__skills-item {
+  padding: 5px;
+}
+.pokemon__card-image {
+  position: inherit;
+  width: 90%;
+  height: 151px;
+  opacity: 1;
+  max-width: 100%;
+  animation: pulse 1s infinite;
+  animation-name: pulse;
+  animation-direction: normal;
+  animation-direction: alternate;
+  border-radius: 5px;
+  margin: auto;
+}
+.pokemon__skills {
+  z-index: 1;
+  display: flex;
+  text-align: initial;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.pokemon__types-item {
+  background-color: white;
+  font-size: 0.7rem;
+  color: black;
+  border-radius: 10px;
+  padding: 5px;
+  width: 90%;
+  display: block;
+}
+
 .pokemon__modal-image-img {
   content: '';
   background: url('/pokeball.png') 50% no-repeat;
@@ -351,53 +420,14 @@ export default {
   height: 180px;
   max-width: 100%;
 }
+.pokemon__modal-energy img {
+  width: 30px;
+  border-radius: 100px;
+}
 .pokemon__modal-image::before {
   content: '';
 }
-.pokemon__types-item {
-  background-color: white;
-  font-size: 0.7rem;
-  color: black;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 10px;
-}
-.pokemon__types-item-type {
-  font-size: 0.7rem;
-  padding: 10px;
-  margin: 10px;
-  color: black;
-}
-.pokemon__card-image {
-  position: inherit;
-  width: 94%;
-  height: 163px;
-  opacity: 1;
-  max-width: 100%;
-  animation: pulse 1s infinite;
-  animation-name: pulse;
-  animation-direction: normal;
-  animation-direction: alternate;
-  border-radius: 5px;
-  border: 3px groove;
-  margin: auto;
-  border: 3px groove;
-}
-.pokemon__skills {
-  z-index: 1;
-  display: flex;
-  text-align: initial;
-  font-size: 12px;
-  margin-top: 5px;
-}
 
-.pokemon__pokedex {
-  font-size: 10px;
-}
-
-.pokemon__skills-item {
-  padding: 5px;
-}
 .pokemon__modal__skills {
   border-top: 2px solid #4713d6;
   margin-bottom: 5px;
@@ -406,11 +436,6 @@ export default {
 .pokemon__modal__skills-item {
   padding: 7px;
   font-size: 1rem;
-}
-.pokemon__card-number {
-  padding-left: 10px;
-  padding-right: 10px;
-  color: white;
 }
 
 @keyframes pulse {
