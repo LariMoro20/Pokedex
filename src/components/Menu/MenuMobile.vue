@@ -20,20 +20,7 @@
             />
           </router-link>
         </q-toolbar-title>
-        <q-btn
-          icon="search"
-          v-if="!is_show_search"
-          @click="showSearch"
-          class="q-mr-xs"
-          color="grey-9"
-        >
-          <q-tooltip anchor="bottom middle" self="center middle">
-            Pesquisar Pokemon
-          </q-tooltip>
-        </q-btn>
-        <div class="col-md-5 col-12 q-mr-sm" v-if="is_show_search">
-          <PokemonSearch @closeSearch="showSearch" />
-        </div>
+        <PokemonSearch @closeSearch="showSearch" />
       </q-toolbar>
     </q-header>
     <q-drawer v-model="leftDrawerOpen" bordered class="bg-black">
@@ -95,7 +82,7 @@
 </template>
 <script>
 import PokemonSearch from 'src/components/Pokemons/PokemonSearch.vue'
-import { useQuasar, Platform } from 'quasar'
+import { Platform } from 'quasar'
 import { defineComponent, ref, computed } from 'vue'
 export default defineComponent({
   components: { PokemonSearch },
@@ -103,19 +90,11 @@ export default defineComponent({
   setup () {
     const year = new Date().getFullYear()
     const leftDrawerOpen = ref(false)
-    const is_show_search = ref(false)
-    const $q = useQuasar()
-
-    const showSearch = () => {
-      is_show_search.value = !is_show_search.value
-    }
 
     return {
       year,
       leftDrawerOpen,
-      is_show_search,
-      isMobile: computed(() => Platform.is.mobile),
-      showSearch
+      isMobile: computed(() => Platform.is.mobile)
     }
   }
 })
