@@ -250,10 +250,10 @@ export default {
         top: '45px',
         left: '19px',
         right: '19px',
-        background: `linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, transparent 50%), url(${this.pokemonTypesAssets.background_img}) 50% no-repeat`,
+        background: `radial-gradient(rgba(255, 255, 255, 0.5), transparent), url(${this.pokemonTypesAssets.background_img}) 50% no-repeat`,
         opacity: 1,
+        backgroundClip: 'content-box',
         borderRadius: '5px',
-        animation: 'pulse 2s infinite alternate',
         height: '43%'
       }
     }
@@ -353,6 +353,9 @@ export default {
 .poke__card-content {
   background-image: url('/images/backgrounds_site/cardboard.png');
   background-size: cover;
+}
+.pokemon__card-image-pulse {
+  animation: pulse 2s alternate infinite;
 }
 .pokemon__card-image-img {
   height: 143px;
