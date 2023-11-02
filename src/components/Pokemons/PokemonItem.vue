@@ -216,7 +216,7 @@
 
 <script>
 import api from '../../services/api'
-import LoadItem from 'src/components/Pokemons/PokemonLoad.vue'
+import LoadItem from 'src/components/Pokemons/PokemonLoad'
 import { pokemontypes } from 'src/constants/pokemonTypes'
 
 export default {
@@ -253,7 +253,7 @@ export default {
         background: `linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, transparent 50%), url(${this.pokemonTypesAssets.background_img}) 50% no-repeat`,
         opacity: 1,
         borderRadius: '5px',
-        animation: 'pulse-5c1c2587 2s infinite alternate',
+        animation: 'pulse 2s infinite alternate',
         height: '43%'
       }
     }
