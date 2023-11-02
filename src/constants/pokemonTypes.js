@@ -10,7 +10,7 @@ const pokemontypes = {
     energy: 'images/energy/simple.png'
   },
   fire: {
-    color: '#f1523c', textColor: '#fff',
+    color: 'rgb(255, 33, 3)', textColor: '#fff',
     bg: 'images/backgrounds_pokemons/bg_fire.png',
     energy: 'images/energy/fire.png'
   },
@@ -20,7 +20,7 @@ const pokemontypes = {
     energy: 'images/energy/water.png'
   },
   grass: {
-    color: '#99c74c', textColor: '#000',
+    color: 'rgba(135, 203, 22, 0.98)', textColor: '#000',
     bg: 'images/backgrounds_pokemons/bg_grass.png',
     energy: 'images/energy/grass.png'
   },

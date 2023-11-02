@@ -3,53 +3,63 @@
     class="poke-card q-pa-sm q-my-md"
     v-if="currentPokemon.types && currentPokemon.image"
   >
-    <div class="" :style="'background-color:' + getTypes.background">
+    <div
+      class="poke__card-content"
+      :style="'background-color:' + pokemonTypesAssets.background"
+    >
       <div
         class="col-md-12 pokemon__card-number flex justify-between items-center"
       >
         <h6
           class="text-capitalize q-pa-xs pokemon__card-pokename"
-          :style="'color:' + getTypes.color"
+          :style="'color:' + pokemonTypesAssets.color"
         >
           {{ currentPokemon.name }}
         </h6>
         <div class="flex items-center">
           <span
             class="pokemon__card-status q-mr-xs text-bold"
-            :style="'color:' + getTypes.color"
+            :style="'color:' + pokemonTypesAssets.color"
           >
             <small class="pokemon__card-hp"> PS:</small> {{ currentPokemon.hp }}
           </span>
           <span
             class="pokemon__card-energy flex items-center"
-            :style="'color:' + getTypes.color"
+            :style="'color:' + pokemonTypesAssets.color"
           >
-            <img :src="getTypes.energy" />
+            <img :src="pokemonTypesAssets.energy" />
           </span>
         </div>
       </div>
       <div
         class="text-center pokemon__card-image q-px-lg flex items-center justify-center"
-        :style="
-          'background: url(' + getTypes.background_img + ') 50% no-repeat;'
-        "
       >
+        <div
+          class="pokemon__card-image-pulse"
+          :style="pulseBackgroundStyle"
+        ></div>
         <div>
           <img class="pokemon__card-image-img" :src="currentPokemon.image" />
         </div>
       </div>
       <div
         class="pokemon__pokedex flex items-center justify-center"
-        :style="'color:' + getTypes.color"
+        :style="'color:' + pokemonTypesAssets.color"
       >
         Número na pokedex: {{ currentPokemon.id }}
       </div>
       <div class="pokemon__skills items-center justify-center">
-        <div class="pokemon__skills-item" :style="'color:' + getTypes.color">
+        <div
+          class="pokemon__skills-item"
+          :style="'color:' + pokemonTypesAssets.color"
+        >
           <b> Ataque:</b> {{ currentPokemon.attack }}<br />
           <b> Defesa:</b> {{ currentPokemon.defense }}
         </div>
-        <div class="pokemon__skills-item" :style="'color:' + getTypes.color">
+        <div
+          class="pokemon__skills-item"
+          :style="'color:' + pokemonTypesAssets.color"
+        >
           <b> Ataque V:</b> {{ currentPokemon.special_attack }}<br />
           <b> Defesa V:</b>
           {{ currentPokemon.special_defense }}
@@ -218,7 +228,7 @@ export default {
   },
   components: { LoadItem },
   computed: {
-    getTypes () {
+    pokemonTypesAssets () {
       let pokemonType =
         this.pokemontypes[this.currentPokemon.types[0].type.name]
       let bgcolor = pokemonType.color
@@ -232,6 +242,19 @@ export default {
         color: color,
         background_img: background_img,
         energy: energy
+      }
+    },
+    pulseBackgroundStyle () {
+      return {
+        position: 'absolute',
+        top: '45px',
+        left: '19px',
+        right: '19px',
+        background: `linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, transparent 50%), url(${this.pokemonTypesAssets.background_img}) 50% no-repeat`,
+        opacity: 1,
+        borderRadius: '5px',
+        animation: 'pulse-5c1c2587 2s infinite alternate',
+        height: '43%'
       }
     }
   },
@@ -262,7 +285,6 @@ export default {
       let pokemonType = 'normal'
       if (typeof type === 'string') pokemonType = this.pokemontypes[type]
       else pokemonType = this.pokemontypes[type_default]
-
       return pokemonType
     },
 
@@ -326,10 +348,11 @@ export default {
 <style scoped>
 .poke-card {
   background-color: #e2e2e2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .poke__card-content {
-  background-color: #fff;
-  min-height: 350px;
+  background-image: url('/images/backgrounds_site/cardboard.png');
+  background-size: cover;
 }
 .pokemon__card-image-img {
   height: 143px;
@@ -385,13 +408,10 @@ export default {
   height: 151px;
   opacity: 1;
   max-width: 100%;
-  animation: pulse 1s infinite;
-  animation-name: pulse;
-  animation-direction: normal;
-  animation-direction: alternate;
   border-radius: 5px;
   margin: auto;
 }
+
 .pokemon__skills {
   z-index: 1;
   display: flex;
@@ -445,7 +465,7 @@ export default {
     filter: brightness(100%);
   }
   100% {
-    filter: brightness(125%);
+    filter: brightness(135%);
   }
 }
 </style>
