@@ -41,8 +41,8 @@ export default {
   font-family: 'Inter', sans-serif;
 }
 .poke__page {
-  background-color: #194587;
-  /* background-image: url('/images/bg.jpg');*/
+  background-color: #2d6db4;
+  background-image: url('/images/backgrounds_site/container_bg.png');
   background-repeat: repeat;
   background-attachment: fixed;
 }
