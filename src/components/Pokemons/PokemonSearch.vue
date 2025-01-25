@@ -32,7 +32,6 @@
       </q-btn>
     </template>
   </q-input>
-
   <PokemonItemModal :url="currentPokemon_url" v-if="currentPokemon_url" />
 </template>
 
