@@ -28,7 +28,7 @@
           </div>
           <q-btn icon="home" flat color="primary" to="/" label="Inicial" />
           <q-btn color="primary" flat icon="gamepad" label="Game" to="/game" />
-          <q-btn color="primary" flat icon="info" label="Sobre" to="/about" />
+          <q-btn color="primary" flat icon="info" to="/about" />
         </div>
       </q-toolbar>
     </q-header>
