@@ -242,7 +242,6 @@ export default {
     watch(
       () => props.url,
       newVal => {
-        console.log('wwww')
         getPokeByURL()
       },
       { immediate: true, deep: true }
@@ -250,9 +249,6 @@ export default {
     watch(
       () => props.openModal,
       newVal => {
-        if (!currentPokemon.value) getPokeByURL()
-
-        console.log('abre', newVal)
         //openDialog.value = newVal
       },
       { immediate: true, deep: true }
