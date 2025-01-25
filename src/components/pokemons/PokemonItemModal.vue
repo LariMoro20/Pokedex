@@ -1,5 +1,6 @@
 <template>
   <q-dialog
+    @hide="handleCloseDialog"
     class="text-white no-scroll q-pa-none"
     v-model="openDialog"
     data-cy="pokemon_details_modal"
@@ -158,29 +159,22 @@
 <script>
 import api from '../../services/api'
 import { pokemontypes } from 'src/constants/pokemonTypes'
+import { ref, watch, onMounted, computed } from 'vue'
+import { useQuasar } from 'quasar'
 
 export default {
   props: {
     url: {
       type: String,
       default: ''
-    }
+    },
+    openModal: { type: Boolean, default: false }
   },
-  computed: {
-    pokemonTypesAssets () {
-      let pokemonType =
-        this.pokemontypes[this.currentPokemon.types[0].type.name]
-      let background_img = pokemonType.bg
-        ? pokemonType.bg
-        : 'images/backgrounds_pokemons/fundo-poke.jpg'
-      return {
-        background_img: background_img
-      }
-    }
-  },
-  data: () => ({
-    openDialog: false,
-    currentPokemon: {
+
+  setup (props, { emit }) {
+    const $q = useQuasar()
+    const openDialog = ref(false)
+    const currentPokemon = ref({
       id: '',
       name: '',
       types: [],
@@ -191,37 +185,27 @@ export default {
       speed: '',
       galery: [],
       image: ''
-    },
-    pokemontypes
-  }),
-  created () {
-    this.getPokeByURL()
-  },
-  watch: {
-    url: function () {
-      this.getPokeByURL()
-    }
-  },
-  methods: {
-    getTypesForModal (type) {
-      let pokemonType = this.pokemontypes[type] || this.pokemontypes['normal']
+    })
+    const pokemontype = ref(pokemontypes)
+
+    const pokemonTypesAssets = computed(() => {
+      let pokemonType =
+        pokemontype.value[currentPokemon.value.types[0].type.name]
+      let background_img =
+        pokemonType.bg || 'images/backgrounds_pokemons/fundo-poke.jpg'
+      return { background_img }
+    })
+
+    const getTypesForModal = type => {
+      let pokemonType = pokemontype.value[type] || pokemontype.value['normal']
       return pokemonType
-    },
+    }
 
-    async handleOpenDialog () {
-      this.$q.loading.show()
-      this.currentPokemon.species_url
-        ? (await this.getPokeSpecie(this.currentPokemon.species_url),
-          (this.openDialog = !this.openDialog))
-        : ''
-      this.$q.loading.hide()
-    },
-
-    async getPokeByURL () {
+    const getPokeByURL = async () => {
       await api
-        .get(this.url)
+        .get(props.url)
         .then(async response => {
-          this.currentPokemon = {
+          currentPokemon.value = {
             name: response.data.name,
             types: response.data.types,
             id: response.data.id,
@@ -236,21 +220,58 @@ export default {
             galery: response.data.sprites.other,
             species_url: response.data.species.url
           }
-          await this.getPokeSpecie(this.currentPokemon.species_url)
-          this.openDialog = true
+          await getPokeSpecie(currentPokemon.value.species_url)
+          openDialog.value = true
         })
         .catch(() => {
-          this.$q.notify({
+          handleCloseDialog()
+          $q.notify({
             type: 'negative',
             position: 'bottom',
             message: `Ops, parece que este não existe..`
           })
         })
-    },
-    async getPokeSpecie (url) {
+    }
+
+    const getPokeSpecie = async url => {
       await api.get(url).then(response => {
-        this.currentPokemon.egg_groups = response.data.egg_groups
+        currentPokemon.value.egg_groups = response.data.egg_groups
       })
+    }
+
+    watch(
+      () => props.url,
+      newVal => {
+        console.log('wwww')
+        getPokeByURL()
+      },
+      { immediate: true, deep: true }
+    )
+    watch(
+      () => props.openModal,
+      newVal => {
+        if (!currentPokemon.value) getPokeByURL()
+
+        console.log('abre', newVal)
+        //openDialog.value = newVal
+      },
+      { immediate: true, deep: true }
+    )
+    const handleCloseDialog = () => {
+      emit('closeModal', false)
+      openDialog.value = false
+    }
+
+    return {
+      openDialog,
+      currentPokemon,
+      pokemontypes,
+      pokemontype,
+      pokemonTypesAssets,
+      getTypesForModal,
+      getPokeByURL,
+      getPokeSpecie,
+      handleCloseDialog
     }
   }
 }

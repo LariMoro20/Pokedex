@@ -251,12 +251,13 @@
 import api from '../../services/api'
 import LoadItem from 'src/components/Pokemons/PokemonLoad'
 import { pokemontypes } from 'src/constants/pokemonTypes'
+import PokemonItemModal from 'src/components/Pokemons/PokemonItemModal.vue'
 
 export default {
   props: {
     url: {
       type: String,
-      default: ''
+      default: null
     }
   },
   components: { LoadItem },

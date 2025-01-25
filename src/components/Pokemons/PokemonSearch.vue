@@ -16,8 +16,7 @@
       <q-btn
         icon="search"
         data-cy="pokemon_search_button"
-        color="primary
-"
+        color="primary"
         :disable="current_id === ''"
         @click="setCurrentPokemon"
       >
@@ -32,41 +31,52 @@
       </q-btn>
     </template>
   </q-input>
-  <PokemonItemModal :url="currentPokemon_url" v-if="currentPokemon_url" />
+  <PokemonItemModal
+    :url="currentPokemon_url"
+    v-if="currentPokemon_url"
+    :openModal="openModal"
+    :ref="currentPokemon_url"
+    @closeModal="openModal = false"
+  />
 </template>
 
 <script>
+import { ref } from 'vue'
 import PokemonItemModal from 'src/components/Pokemons/PokemonItemModal.vue'
 
 export default {
   name: 'PokemonSearch',
   components: { PokemonItemModal },
   emits: ['closeSearch'],
-  data: () => ({
-    currentPokemon_url: '',
-    current_id: '',
-    openModal: false,
-    pokemons: [],
-    pokemonsList: [],
-    nextUrl: '/pokemon/'
-  }),
 
-  created () {},
+  setup (props, { emit }) {
+    const currentPokemon_url = ref('')
+    const current_id = ref('')
+    const openModal = ref(false)
 
-  methods: {
-    setCurrentPokemon () {
-      if (this.current_id != '') {
-        this.currentPokemon_url =
-          'https://pokeapi.co/api/v2/pokemon/' + this.current_id.toLowerCase()
-        if (this.currentPokemon_url) this.openModal = true
+    const setCurrentPokemon = () => {
+      if (current_id.value !== '') {
+        currentPokemon_url.value =
+          'https://pokeapi.co/api/v2/pokemon/' + current_id.value.toLowerCase()
+        if (currentPokemon_url.value) openModal.value = true
       }
-    },
-    cancelSearch () {
-      this.$emit('closeSearch', this.editor)
+    }
+
+    const cancelSearch = () => {
+      emit('closeSearch', current_id.value)
+    }
+
+    return {
+      currentPokemon_url,
+      current_id,
+      openModal,
+      setCurrentPokemon,
+      cancelSearch
     }
   }
 }
 </script>
+
 <style scoped>
 .pokemon__search-result {
   background-color: #afafafe3;
