@@ -114,20 +114,24 @@
 
               <div class="col-12 q-mb-sm">
                 <span class="pokemon__types-item text-capitalize">
+                  <span class="mdi mdi-ruler"></span>
                   Altura: {{ currentPokemon.height }} m
                 </span>
               </div>
               <div class="col-12 q-mb-sm">
                 <span class="pokemon__types-item text-capitalize">
+                  <span class="mdi mdi-weight"></span>
                   Peso: {{ currentPokemon.weight }} kg
                 </span>
               </div>
 
               <div class="col-12 q-mb-sm">
                 <span class="pokemon__types-item text-capitalize">
-                  Velocidade: {{ currentPokemon.speed }}
+                  <span class="mdi mdi-speedometer"></span>
+                  Velocidade: {{ currentPokemon.speed }} Km/h
                 </span>
               </div>
+
               <div class="col-12 q-mb-sm">
                 Energias:
 
