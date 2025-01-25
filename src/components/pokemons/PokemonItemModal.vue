@@ -51,7 +51,11 @@
                 v-for="(sprintes, ikey) in currentPokemon.galery"
                 :key="ikey"
               >
-                <img style="width: 90%" :src="sprintes.front_default" />
+                <img
+                  style="width: 90%"
+                  v-if="sprintes.front_default"
+                  :src="sprintes.front_default"
+                />
               </div>
             </div>
           </div>
@@ -221,7 +225,12 @@ export default {
             image:
               response.data.sprites.other['official-artwork'].front_default ||
               '/notfound.png',
-            galery: response.data.sprites.other,
+            galery: response.data.sprites.other
+              ? Object.values(response.data.sprites.other).filter(
+                  item => item.front_default
+                )
+              : [],
+
             species_url: response.data.species.url
           }
           await getPokeSpecie(currentPokemon.value.species_url)

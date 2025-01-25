@@ -212,7 +212,6 @@
                     </div>
                     <div class="col-12 q-mb-sm">
                       Energias:
-
                       <div class="text-capitalize flex flex-center">
                         <span
                           class="pokemon__modal-energy q-pr-sm"
@@ -352,6 +351,11 @@ export default {
               : '/notfound.png'
           //Special stats
           this.currentPokemon.galery = response.data.sprites.other
+            ? Object.values(response.data.sprites.other).filter(
+                item => item.front_default
+              )
+            : []
+
           this.currentPokemon.hp = response.data.stats[0].base_stat
           this.currentPokemon.attack = response.data.stats[1].base_stat
           this.currentPokemon.defense = response.data.stats[2].base_stat
