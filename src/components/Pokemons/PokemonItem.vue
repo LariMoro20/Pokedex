@@ -122,7 +122,7 @@
                     </div>
                   </div>
                   <div
-                    class="col-12 row flex justify-center"
+                    class="col-12 row flex justify-center items-end"
                     v-if="$q.screen.gt.sm"
                   >
                     <div
