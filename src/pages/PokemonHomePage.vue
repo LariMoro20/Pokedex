@@ -3,7 +3,7 @@
     <div class="container q-pa-md">
       <div class="row flex-center" v-if="!has_error">
         <div
-          class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke"
+          class="col-6 col-md-6 col-lg-6 q-px-lg q-py-sm item__poke"
           v-for="(pokemon, ikey) in pokemons"
           :key="ikey"
           data-cy="pokemons_list"

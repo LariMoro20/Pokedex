@@ -33,32 +33,15 @@
     </template>
   </q-input>
 
-  <q-dialog
-    class="text-white no-scroll q-pa-none no-scroll"
-    v-model="openModal"
-    data-cy="pokemon_search_modal"
-  >
-    <div v-if="currentPokemon_url" class="pokemon__search-result q-pa-sm">
-      <div class="row flex-center">
-        <div class="text-h6 q-pl-lg">Pokemon encontrado</div>
-        <q-space />
-        <q-btn icon="close" flat round dense v-close-popup />
-      </div>
-      <div class="row flex-center">
-        <div class="col-md-4 col-lg-4 col-12 q-px-lg q-py-sm item__poke">
-          <Item :url="currentPokemon_url" />
-        </div>
-      </div>
-    </div>
-  </q-dialog>
+  <PokemonItemModal :url="currentPokemon_url" v-if="currentPokemon_url" />
 </template>
 
 <script>
-import Item from 'src/components/Pokemons/PokemonItem.vue'
+import PokemonItemModal from 'src/components/Pokemons/PokemonItemModal.vue'
 
 export default {
   name: 'PokemonSearch',
-  components: { Item },
+  components: { PokemonItemModal },
   emits: ['closeSearch'],
   data: () => ({
     currentPokemon_url: '',
