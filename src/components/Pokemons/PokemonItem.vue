@@ -133,8 +133,8 @@
                 </div>
                 <div
                   :class="[
-                    'col-md-4 row bg-primary q-pl-xl',
-                    $q.screen.gt.sm ? 'pokeball-red' : ''
+                    'col-md-4 row bg-primary ',
+                    $q.screen.gt.sm ? 'pokeball-red q-pl-xl' : 'q-pa-xl'
                   ]"
                 >
                   <div class="col-md-12 full-width">
