@@ -84,7 +84,10 @@
             backdropFilter: 'blur(4px) saturate(150%) brightness(40%)'
           }"
         >
-          <q-card class="bg-white no-scroll" style="max-width: 70vw">
+          <q-card
+            class="bg-white no-scroll"
+            :style="[$q.screen.gt.sm ? 'max-width: 70vw' : 'max-width: 100vw']"
+          >
             <q-card-section
               class="q-pa-none scroll full-height flex items-center justify-center"
               :style="{
