@@ -16,7 +16,8 @@
       <q-btn
         icon="search"
         data-cy="pokemon_search_button"
-        color="grey-9"
+        color="primary
+"
         :disable="current_id === ''"
         @click="setCurrentPokemon"
       >
@@ -24,7 +25,7 @@
           Pesquisar
         </q-tooltip>
       </q-btn>
-      <q-btn icon="close" color="grey-9" @click="cancelSearch">
+      <q-btn flat icon="close" color="grey-9" @click="cancelSearch">
         <q-tooltip anchor="bottom middle" self="center middle">
           Cancelar
         </q-tooltip>

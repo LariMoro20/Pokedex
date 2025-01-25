@@ -80,20 +80,36 @@
           class="text-white no-scroll q-pa-none no-scroll"
           v-model="openDialog"
           data-cy="pokemon_details_modal"
+          :style="{
+            backdropFilter: 'blur(4px) saturate(150%) brightness(40%)'
+          }"
         >
-          <q-card class="bg-grey-10 no-scroll text-white full-height">
-            <q-card-section class="text-center q-pa-sm">
-              <div class="text-h6 text-capitalize">
-                #{{ currentPokemon.id }} {{ currentPokemon.name }}
-              </div>
-            </q-card-section>
-
+          <q-card class="bg-white no-scroll" style="max-width: 70vw">
             <q-card-section
-              class="q-pt-none scroll full-height flex items-center justify-center"
-              style="max-height: 72vh"
+              class="q-pa-none scroll full-height flex items-center justify-center"
+              :style="{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${pokemonTypesAssets.background_img})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }"
             >
-              <div class="itemtrst full-width">
-                <div class="row">
+              <div class="full-width full-heigth row">
+                <div class="col-md-8 row flex items-center q-pa-lg">
+                  <div
+                    class="col-md-12 full-width text-right text-h5"
+                    v-if="!$q.screen.gt.sm"
+                  >
+                    <q-btn
+                      icon="close"
+                      class="text-white"
+                      flat
+                      round
+                      dense
+                      v-close-popup
+                    />
+                  </div>
+
                   <div class="col-md-12 text-center full-width">
                     <div class="pokemon__modal-image">
                       <img
@@ -102,17 +118,96 @@
                       />
                     </div>
                   </div>
+                  <div
+                    class="col-12 row flex justify-center"
+                    v-if="$q.screen.gt.sm"
+                  >
+                    <div
+                      class="col-md-2 q-pa-sm text-black"
+                      v-for="(sprintes, ikey) in currentPokemon.galery"
+                      :key="ikey"
+                    >
+                      <img style="width: 90%" :src="sprintes.front_default" />
+                    </div>
+                  </div>
                 </div>
-                <div class="row">
+                <div
+                  :class="[
+                    'col-md-4 row bg-primary q-pl-xl',
+                    $q.screen.gt.sm ? 'pokeball-red' : ''
+                  ]"
+                >
                   <div class="col-md-12 full-width">
+                    <div
+                      class="col-md-12 full-width text-right text-h5"
+                      v-if="$q.screen.gt.sm"
+                    >
+                      <q-btn
+                        icon="close"
+                        class="text-white"
+                        flat
+                        round
+                        dense
+                        v-close-popup
+                      />
+                    </div>
+                    <div
+                      class="col-md-12 full-width text-center text-h4 text-capitalize"
+                    >
+                      #{{ currentPokemon.id }} {{ currentPokemon.name }}
+                    </div>
+
                     <div class="col-md-12 full-width text-center text-h6">
                       HP: {{ currentPokemon.hp }}
                     </div>
-
+                  </div>
+                  <div class="col-md-12 full-width row">
+                    <div class="col-12">Habilidades</div>
                     <div
-                      class="row flex q-pa-md bg-black text-white flex-center justify-around"
+                      class="col-6 q-mb-sm"
+                      v-for="(hability, ikey) in currentPokemon.abilities"
+                      :key="ikey"
                     >
-                      <div>
+                      <span class="pokemon__types-item text-capitalize">
+                        {{ hability.ability.name }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12 full-width row">
+                    <div class="col-12">Grupo de ovos</div>
+                    <div
+                      class="col-6 q-mb-sm"
+                      v-for="(egg, ikey) in currentPokemon.egg_groups"
+                      :key="ikey"
+                    >
+                      <span class="pokemon__types-item text-capitalize">
+                        {{ egg.name }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12 full-width row">
+                    <div class="col-12">Dados</div>
+
+                    <div class="col-12 q-mb-sm">
+                      <span class="pokemon__types-item text-capitalize">
+                        Altura: {{ currentPokemon.height }} m
+                      </span>
+                    </div>
+                    <div class="col-12 q-mb-sm">
+                      <span class="pokemon__types-item text-capitalize">
+                        Peso: {{ currentPokemon.weight }} kg
+                      </span>
+                    </div>
+
+                    <div class="col-12 q-mb-sm">
+                      <span class="pokemon__types-item text-capitalize">
+                        Velocidade: {{ currentPokemon.speed }}
+                      </span>
+                    </div>
+                    <div class="col-12 q-mb-sm">
+                      Energias:
+
+                      <div class="text-capitalize flex flex-center">
                         <span
                           class="pokemon__modal-energy q-pr-sm"
                           v-for="(type, ikey) in currentPokemon.types"
@@ -130,74 +225,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-12 full-width">
-                    <div
-                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white justify-around"
-                    >
-                      <div
-                        class="col-6 text-center pokemon__modal__skills-item text-capitalize"
-                      >
-                        <div class="row">
-                          <div class="col-12">Habilidades</div>
-                          <div
-                            class="col-6 q-mb-sm"
-                            v-for="(hability, ikey) in currentPokemon.abilities"
-                            :key="ikey"
-                          >
-                            <span class="pokemon__types-item text-capitalize">
-                              {{ hability.ability.name }}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="col-6 text-center pokemon__modal__skills-item text-capitalize"
-                      >
-                        <div class="row">
-                          <div class="col-12">Grupo de ovos</div>
-                          <div
-                            class="col-6 q-mb-sm"
-                            v-for="(egg, ikey) in currentPokemon.egg_groups"
-                            :key="ikey"
-                          >
-                            <span class="pokemon__types-item text-capitalize">
-                              {{ egg.name }}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="row flex pokemon__modal__skills q-pa-sm bg-black text-white flex-center justify-around"
-                    >
-                      <div class="pokemon__modal__skills-item">
-                        Altura: {{ currentPokemon.height }} m
-                      </div>
-                      <div class="pokemon__modal__skills-item">
-                        Peso: {{ currentPokemon.weight }} kg
-                      </div>
-
-                      <div class="pokemon__modal__skills-item">
-                        Velocidade: {{ currentPokemon.speed }}
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </q-card-section>
-
-            <q-card-actions
-              align="right"
-              class="bg-grey-10 text-white text-center flex justify-center flex-center q-pt-md q-mb-lg"
-            >
-              <q-btn
-                size="md"
-                label="Fechar"
-                class="bg-red-10 col-4"
-                v-close-popup
-              />
-            </q-card-actions>
           </q-card>
         </q-dialog>
       </q-card-section>
@@ -314,6 +344,7 @@ export default {
               ? response.data.sprites.other['official-artwork'].front_default
               : '/notfound.png'
           //Special stats
+          this.currentPokemon.galery = response.data.sprites.other
           this.currentPokemon.hp = response.data.stats[0].base_stat
           this.currentPokemon.attack = response.data.stats[1].base_stat
           this.currentPokemon.defense = response.data.stats[2].base_stat
@@ -349,6 +380,9 @@ export default {
 .poke-card {
   background-color: #e2e2e2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.pokemon_details-close {
+  position: absolute;
 }
 .poke__card-content {
   background-image: url('/images/backgrounds_site/cardboard.png');
@@ -441,8 +475,7 @@ export default {
   background-size: cover;
   top: 50%;
   left: 50%;
-  width: 180px;
-  height: 180px;
+  width: 40%;
   max-width: 100%;
 }
 .pokemon__modal-energy img {
@@ -461,6 +494,12 @@ export default {
 .pokemon__modal__skills-item {
   padding: 7px;
   font-size: 1rem;
+}
+
+.pokeball-red {
+  background-color: red;
+
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 @keyframes pulse {

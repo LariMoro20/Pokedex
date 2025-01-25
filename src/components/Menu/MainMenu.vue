@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-header>
-      <q-toolbar class="bg-black text-white">
+      <q-toolbar class="bg-white text-white">
         <q-toolbar-title class="flex items-center">
           <router-link class="flex items-center" to="/">
             <img
@@ -11,30 +11,25 @@
             />
           </router-link>
         </q-toolbar-title>
-        <q-btn
-          icon="search"
-          v-if="!is_show_search"
-          @click="showSearch"
-          class="q-mr-xs"
-          color="grey-9"
-          data-cy="pokemon_search_open"
-        >
-          <q-tooltip anchor="bottom middle" self="center middle">
-            Pesquisar Pokemon
-          </q-tooltip>
-        </q-btn>
-        <div class="col-md-5 col-12 q-mr-sm" v-if="is_show_search">
-          <PokemonSearch @closeSearch="showSearch" />
+        <div class="q-gutter-sm flex">
+          <q-btn
+            icon="search"
+            v-if="!is_show_search"
+            @click="showSearch"
+            color="primary"
+            data-cy="pokemon_search_open"
+          >
+            <q-tooltip anchor="bottom middle" self="center middle">
+              Pesquisar Pokemon
+            </q-tooltip>
+          </q-btn>
+          <div class="" v-if="is_show_search">
+            <PokemonSearch @closeSearch="showSearch" />
+          </div>
+          <q-btn icon="home" flat color="primary" to="/" label="Inicial" />
+          <q-btn color="primary" flat icon="gamepad" label="Game" to="/game" />
+          <q-btn color="primary" flat icon="info" label="Sobre" to="/about" />
         </div>
-        <q-btn
-          icon="home"
-          class="q-mr-xs"
-          color="grey-10"
-          to="/"
-          label="Inicial"
-        />
-        <q-btn color="grey-10" icon="gamepad" label="Game" to="/game" />
-        <q-btn color="grey-10" icon="info" label="Sobre" to="/about" />
       </q-toolbar>
     </q-header>
   </div>
