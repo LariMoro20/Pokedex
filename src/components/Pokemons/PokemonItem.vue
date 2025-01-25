@@ -497,9 +497,7 @@ export default {
 }
 
 .pokeball-red {
-  background-color: red;
-
-  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(11% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 @keyframes pulse {
