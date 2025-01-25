@@ -230,7 +230,6 @@ export default {
                   item => item.front_default
                 )
               : [],
-
             species_url: response.data.species.url
           }
           await getPokeSpecie(currentPokemon.value.species_url)
