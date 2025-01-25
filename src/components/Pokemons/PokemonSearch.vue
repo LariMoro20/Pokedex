@@ -42,7 +42,7 @@
 
 <script>
 import { ref } from 'vue'
-import PokemonItemModal from 'src/components/Pokemons/PokemonItemModal.vue'
+import PokemonItemModal from 'src/components/pokemons/PokemonItemModal.vue'
 
 export default {
   name: 'PokemonSearch',
