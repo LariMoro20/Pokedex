@@ -1,11 +1,12 @@
 <template>
   <div>
     <q-header>
-      <q-toolbar class="bg-black text-white">
+      <q-toolbar class="bg-white text-white">
         <q-btn
           flat
           dense
           round
+          color="black"
           icon="menu"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
@@ -23,7 +24,7 @@
           v-if="!is_show_search"
           @click="showSearch"
           class="q-mr-xs"
-          color="grey-9"
+          color="primary"
         >
           <q-tooltip anchor="bottom middle" self="center middle">
             Pesquisar Pokemon
@@ -34,16 +35,8 @@
         </div>
       </q-toolbar>
     </q-header>
-    <q-drawer v-model="leftDrawerOpen" bordered class="bg-black">
-      <q-list class="bg-black">
-        <q-item-label
-          color="red-10"
-          header
-          class="pokemon_menu-header bg-black"
-        >
-          Menu
-        </q-item-label>
-
+    <q-drawer v-model="leftDrawerOpen" bordered class="bg-primary">
+      <q-list class="">
         <q-item
           color="red-10"
           clickable
