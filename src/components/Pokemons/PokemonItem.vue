@@ -38,7 +38,7 @@
           class="pokemon__card-image-pulse"
           :style="pulseBackgroundStyle"
         ></div>
-        <div>
+        <div class="pokemon__card-image-container">
           <img class="pokemon__card-image-img" :src="currentPokemon.image" />
         </div>
       </div>
@@ -408,7 +408,7 @@ export default {
   transform: scale(1);
 }
 .pokemon__card-image-img:hover {
-  transform: scale(1.1);
+  animation: tofront 1.4s both;
 }
 .pokemon__card-name {
   padding: 10px;
@@ -516,6 +516,19 @@ export default {
   }
   100% {
     filter: brightness(135%);
+  }
+}
+
+@keyframes tofront {
+  0% {
+    transform: scale(1) rotate3d(0, 0, 0, 0deg) translate3d(0, 0, 0); /* Corrigido o valor de translate */
+    z-index: 1;
+    filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
+  }
+  100% {
+    transform: scale(1.2) rotate3d(1, 0, 0, 10deg) translate3d(0, 0, 60px);
+    z-index: 10;
+    filter: drop-shadow(0 0 0rem rgba(0, 0, 0, 0.7));
   }
 }
 </style>
