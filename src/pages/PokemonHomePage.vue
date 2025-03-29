@@ -3,7 +3,7 @@
     <div class="container q-pa-md">
       <div class="row flex-center" v-if="!has_error">
         <div
-          class="col-6 col-md-6 col-lg-6 q-px-lg q-py-sm item__poke"
+          class="col-6 col-md-3 col-lg-2 q-px-sm q-py-sm item__poke"
           v-for="(pokemon, ikey) in pokemons"
           :key="ikey"
           data-cy="pokemons_list"
@@ -119,7 +119,6 @@ export default {
   background-color: #afafafe3;
 }
 .item__poke {
-  width: 300px;
 }
 .pokemon__notfound {
   width: 50%;
