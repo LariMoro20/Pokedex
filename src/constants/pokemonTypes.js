@@ -5,7 +5,7 @@ const pokemontypes = {
     energy: 'images/energy/fly.png'
   },
   normal: {
-    color: '#97a3a9', textColor: '#000',
+    color: '#fff', textColor: '#000',
     bg: 'images/backgrounds_pokemons/fundo-poke.jpg',
     energy: 'images/energy/simple.png'
   },

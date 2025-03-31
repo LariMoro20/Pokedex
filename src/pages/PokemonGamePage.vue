@@ -18,7 +18,10 @@
           <img
             class="pokemon-img"
             :src="currentPokemon.image"
-            :style="'filter: brightness(' + endGame + ');'"
+            :style="{
+              filter: `brightness(${endGame}) drop-shadow(0px 0px 12px rgba(255,
+255, 255, ${endGame ? 0 : 1}))`
+            }"
           />
         </div>
         <div class="col-12 text-center text-white">

@@ -1,9 +1,15 @@
 <template>
   <q-page class="poke__page flex">
-    <div class="container q-pa-md">
-      <div class="row flex-center" v-if="!has_error">
+    <div class="container row flex justify-center q-pa-md">
+      <div
+        class="col-12 col-md-12 col-lg-12 text-center flex-center text-white"
+      >
+        <h1>Pokedéx da Lari</h1>
+      </div>
+
+      <div class="row col-12 col-md-8 col-lg-8 flex-center" v-if="!has_error">
         <div
-          class="col-6 col-md-3 col-lg-2 q-px-sm q-py-sm item__poke"
+          class="col-6 col-md-4 col-lg-3 q-px-sm q-py-sm item__poke"
           v-for="(pokemon, ikey) in pokemons"
           :key="ikey"
           data-cy="pokemons_list"
