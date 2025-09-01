@@ -289,7 +289,7 @@ export default {
         opacity: 1,
         backgroundClip: 'content-box',
         borderRadius: '5px',
-        height: '43%'
+        height: '45%'
       }
     }
   },

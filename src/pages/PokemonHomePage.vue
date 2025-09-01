@@ -1,13 +1,14 @@
 <template>
   <q-page class="poke__page flex">
-    <div class="container row flex justify-center q-pa-md">
+    <div class="row flex justify-center q-pa-md">
       <div
         class="col-12 col-md-12 col-lg-12 text-center flex-center text-white"
-      >
-        <h1>Pokedéx da Lari</h1>
-      </div>
+      ></div>
 
-      <div class="row col-12 col-md-8 col-lg-8 flex-center" v-if="!has_error">
+      <div
+        class="row col-12 col-sm-12 col-xs-12 col-md-8 col-lg-8 flex-center"
+        v-if="!has_error"
+      >
         <div
           class="col-6 col-md-4 col-lg-3 q-px-sm q-py-sm item__poke"
           v-for="(pokemon, ikey) in pokemons"
