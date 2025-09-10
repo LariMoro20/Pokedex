@@ -72,6 +72,7 @@
             label="Detalhes"
             data-cy="pokemon_details"
             color="primary"
+            style="font-size: 12px; font-weight: bolder"
             @click="handleOpenDialog"
           />
         </div>
@@ -450,6 +451,11 @@ export default {
 
 .pokemon__skills-item {
   padding: 5px;
+  background-color: #d6d6d64d;
+  border-radius: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.51);
 }
 .pokemon__card-image {
   position: inherit;
