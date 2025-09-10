@@ -388,7 +388,7 @@ export default {
 
 <style scoped>
 .poke-card {
-  background-color: #e2e2e2;
+  background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .pokemon_details-close {
@@ -444,6 +444,8 @@ export default {
 }
 .pokemon__pokedex {
   font-size: 10px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .pokemon__skills-item {

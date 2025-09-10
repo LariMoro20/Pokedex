@@ -38,7 +38,7 @@ export default {
 </script>
 <style>
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 .poke__page {
   background-color: #000771;
