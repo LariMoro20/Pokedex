@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-header>
-      <q-toolbar class="bg-white text-white">
+      <q-toolbar class="bg-white text-white flex-center">
         <q-toolbar-title class="flex items-center">
           <router-link class="flex items-center" to="/">
             <img
