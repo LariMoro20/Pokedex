@@ -8,7 +8,7 @@ import { configure } from "quasar/wrappers";
 export default configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
-    supportTS: false,
+    supportTS: true,
 
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: ["axios"],
